@@ -14,28 +14,23 @@ export class ApiService {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/users/count`);
   }
 
-  public getLogs(limit?, offset?) {
-    return this.httpClient.get(`${environment.apiUrl}/logs`, { params: { limit, offset } });
+  public getNewUsersByDay(days = 7) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/new`, { params: { days: `${days}` } });
   }
 
-  public getLogsForPlayer(pid, limit?, offset?) {
-    return this.httpClient.get(`${environment.apiUrl}/logs/${pid}`, { params: { limit, offset } });
+  public getTotalVoiceEvents() {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/voice/count`);
   }
 
-  public getPlayerInformation(pid) {
-    return this.httpClient.get(`${environment.apiUrl}/player/${pid}`);
+  public getAverageVoiceTime() {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/voice/average`);
   }
 
-  public getPlayerNames(pids) {
-    return this.httpClient.get(`${environment.apiUrl}/playernames`, { params: { pids }});
+  public getTotalMessageCount() {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/messages/count`);
   }
 
-  public getPlayerMoneyHistory(pid) {
-    return this.httpClient.get(`${environment.apiUrl}/player/${pid}/moneyHistory`);
+  public getTotalSquadEvents() {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/squad/count`);
   }
-
-  public getPlayerVehicles(pid, limit?, offset?) {
-    return this.httpClient.get(`${environment.apiUrl}/player/${pid}/vehicles`, { params: { limit, offset } });
-  }
-
 }
