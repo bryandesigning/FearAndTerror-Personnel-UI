@@ -11,7 +11,7 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
   public getUserCount() {
-    return this.httpClient.get(`${environment.apiUrl}/users/count`);
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/count`);
   }
 
   public getLogs(limit?, offset?) {

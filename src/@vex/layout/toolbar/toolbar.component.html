@@ -1,4 +1,5 @@
 <div class="toolbar w-full px-gutter" fxLayout="row" fxLayoutAlign="start center" vexContainer>
+  <!-- Access Side Nav Here -->
   <button (click)="openSidenav()" [fxHide]="!mobileQuery" mat-icon-button type="button">
     <mat-icon [icIcon]="icMenu"></mat-icon>
   </button>
@@ -8,19 +9,19 @@
      class="ltr:mr-4 rtl:ml-4 block"
      fxLayout="row"
      fxLayoutAlign="start center">
-    <img class="w-8 select-none" src="assets/img/demo/logo.svg">
-    <h1 [fxHide]="mobileQuery" class="title ltr:pl-4 rtl:pr-4 m-0 select-none">VEX</h1>
+    <img class="w-8 select-none" src="assets/img/logo-icon.png">
+    <h1 [fxHide]="mobileQuery" class="title ltr:pl-4 rtl:pr-4 m-0 select-none">Fear And Terror</h1>
   </a>
 
-  <button *ngIf="isHorizontalLayout$ | async"
+  <!-- <button *ngIf="isHorizontalLayout$ | async"
           [fxHide]="mobileQuery"
           [matMenuTriggerFor]="addNewMenu"
           color="primary"
           mat-raised-button
           type="button">ADD NEW
-  </button>
+  </button> -->
 
-  <mat-menu #addNewMenu="matMenu" [overlapTrigger]="false" xPosition="after" yPosition="below">
+  <!-- <mat-menu #addNewMenu="matMenu" [overlapTrigger]="false" xPosition="after" yPosition="below">
     <button mat-menu-item>
       <mat-icon [icIcon]="icPersonAdd"></mat-icon>
       <span>Add Contact</span>
@@ -57,9 +58,9 @@
       <mat-icon [icIcon]="icReceipt"></mat-icon>
       <span>Add Receipt</span>
     </button>
-  </mat-menu>
+  </mat-menu> -->
 
-  <div #megaMenuOriginRef class="ltr:ml-2 rtl:mr-2">
+  <!-- <div #megaMenuOriginRef class="ltr:ml-2 rtl:mr-2">
     <button *ngIf="isHorizontalLayout$ | async"
             [fxHide]="mobileQuery"
             (click)="openMegaMenu(megaMenuOriginRef)"
@@ -68,48 +69,48 @@
             type="button">MEGA MENU
       <ic-icon [icon]="icArrowDropDown" class="ltr:-mr-1 rtl:-ml-1" inline="true"></ic-icon>
     </button>
-  </div>
+  </div> -->
 
-
-  <div *ngIf="(isVerticalLayout$ | async) && isNavbarInToolbar$ | async"
+  <!-- <div *ngIf="(isVerticalLayout$ | async) && isNavbarInToolbar$ | async"
        [fxHide]="mobileQuery"
        class="px-gutter"
        fxFlex="none"
        fxLayout="row"
        fxLayoutAlign="start center">
     <vex-navigation-item *ngFor="let item of navigationItems" [item]="item"></vex-navigation-item>
-  </div>
+  </div> -->
 
   <span fxFlex></span>
 
   <div class="-mx-1 flex items-center">
-    <div class="px-1">
+    <!-- <div class="px-1">
       <button (click)="openSearch()" mat-icon-button type="button">
         <mat-icon [icIcon]="icSearch"></mat-icon>
       </button>
-    </div>
+    </div> -->
 
-    <div class="px-1">
+    <!-- NOTIFICATIONS -->
+    <!-- <div class="px-1">
       <vex-toolbar-notifications></vex-toolbar-notifications>
-    </div>
+    </div> -->
 
-    <div class="px-1">
+    <!-- <div class="px-1">
       <button (click)="openQuickpanel()" mat-icon-button type="button">
         <mat-icon [icIcon]="icBookmarks"></mat-icon>
       </button>
-    </div>
+    </div> -->
 
-    <div class="px-1">
+    <!-- <div class="px-1">
       <button [matMenuTriggerFor]="languageMenu" mat-icon-button type="button">
         <mat-icon [icIcon]="emojioneUS"></mat-icon>
       </button>
-    </div>
+    </div> -->
 
     <div class="px-1">
       <vex-toolbar-user></vex-toolbar-user>
     </div>
 
-    <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
+    <!-- <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
       <button mat-menu-item>
         <mat-icon [icIcon]="emojioneUS"></mat-icon>
         <span>English</span>
@@ -119,7 +120,7 @@
         <mat-icon [icIcon]="emojioneDE"></mat-icon>
         <span>German</span>
       </button>
-    </mat-menu>
+    </mat-menu> -->
   </div>
 </div>
 
