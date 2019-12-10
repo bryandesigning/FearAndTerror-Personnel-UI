@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import icSearch from '@iconify/icons-ic/twotone-search';
 
 @Component({
@@ -13,6 +13,7 @@ export class ToolbarSearchComponent implements OnInit {
   icSearch = icSearch;
 
   @ViewChild('input', { read: ElementRef, static: true }) input: ElementRef;
+  @Output() search = new EventEmitter<string>();
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -31,5 +32,9 @@ export class ToolbarSearchComponent implements OnInit {
   close() {
     this.isOpen = false;
     this.cd.markForCheck();
+  }
+
+  submit() {
+    this.search.emit(this.input.nativeElement.value);
   }
 }

@@ -4,6 +4,6 @@
   </button>
   <mat-form-field [class.search-open]="isOpen" appearance="outline" class="search" fxFlex="auto">
     <mat-label>Search&hellip;</mat-label>
-    <input #input (blur)="close()" matInput>
+    <input #input (blur)="close()" matInput (keyup.enter)="submit()">
   </mat-form-field>
 </div>

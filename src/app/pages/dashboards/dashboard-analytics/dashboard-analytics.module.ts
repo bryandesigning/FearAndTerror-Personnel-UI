@@ -19,10 +19,12 @@ import { BreadcrumbsModule } from '../../../../@vex/components/breadcrumbs/bread
 import { MatButtonModule } from '@angular/material/button';
 import { PageLayoutModule } from '../../../../@vex/components/page-layout/page-layout.module';
 import { ContainerModule } from '../../../../@vex/directives/container/container.module';
-
+import { ChannelMessageGraphComponent } from './components/channel-message-graph/channel-message-graph.component';
+import { ColorFadeModule } from 'src/@vex/pipes/color/color-fade.module';
+import { MatSelectModule, MatInputModule } from '@angular/material';
 
 @NgModule({
-  declarations: [DashboardAnalyticsComponent],
+  declarations: [DashboardAnalyticsComponent, ChannelMessageGraphComponent],
   imports: [
     CommonModule,
     DashboardAnalyticsRoutingModule,
@@ -41,7 +43,10 @@ import { ContainerModule } from '../../../../@vex/directives/container/container
     BreadcrumbsModule,
     MatButtonModule,
     PageLayoutModule,
-    ContainerModule
+    ContainerModule,
+    ColorFadeModule,
+    MatSelectModule,
+    MatInputModule,
   ]
 })
 export class DashboardAnalyticsModule {

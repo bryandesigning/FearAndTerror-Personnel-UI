@@ -1,4 +1,5 @@
-<div class="navigation" fxLayout="row" fxLayoutAlign="start center" vexContainer>
+<div class="navigation" fxLayout="row" fxLayoutAlign="space-between center" vexContainer>
   <vex-navigation-item *ngFor="let item of items" [item]="item"></vex-navigation-item>
+  <vex-toolbar-search (search)="handleSearch($event)"></vex-toolbar-search>
 </div>
 

@@ -19,58 +19,6 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class DashboardAnalyticsComponent implements OnInit {
 
-  tableColumns: TableColumn<Order>[] = [
-    {
-      label: '',
-      property: 'status',
-      type: 'badge'
-    },
-    {
-      label: 'PRODUCT',
-      property: 'name',
-      type: 'text'
-    },
-    {
-      label: '$ PRICE',
-      property: 'price',
-      type: 'text',
-      cssClasses: ['font-medium']
-    },
-    {
-      label: 'DATE',
-      property: 'timestamp',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    }
-  ];
-  tableData = tableSalesData;
-
-  series: ApexAxisChartSeries = [{
-    name: 'Subscribers',
-    data: [28, 40, 36, 0, 52, 38, 60, 55, 67, 33, 89, 44]
-  }];
-
-  userSessionsSeries: ApexAxisChartSeries = [
-    {
-      name: 'Users',
-      data: [10, 50, 26, 50, 38, 60, 50, 25, 61, 80, 40, 60]
-    },
-    {
-      name: 'Sessions',
-      data: [5, 21, 42, 70, 41, 20, 35, 50, 10, 15, 30, 50]
-    },
-  ];
-
-  salesSeries: ApexAxisChartSeries = [{
-    name: 'Sales',
-    data: [28, 40, 36, 0, 52, 38, 60, 55, 99, 54, 38, 87]
-  }];
-
-  pageViewsSeries: ApexAxisChartSeries = [{
-    name: 'Page Views',
-    data: [405, 800, 200, 600, 105, 788, 600, 204]
-  }];
-
   discordUsersJoined: ApexAxisChartSeries = [{
     name: 'New Users',
     data: [],
@@ -82,6 +30,19 @@ export class DashboardAnalyticsComponent implements OnInit {
       height: 137,
     },
     colors: [ theme.colors.primary['500'] ]
+  });
+
+  messagesPerDay: ApexAxisChartSeries = [{
+    name: 'Messages Per Day',
+    data: [],
+  }];
+
+  messagesPerDayOptions = defaultChartOptions({
+    chart: {
+      type: 'line',
+      height: 137,
+    },
+    colors: [ theme.colors.orange['500'] ]
   });
 
   icGroup = icGroup;
@@ -111,6 +72,8 @@ export class DashboardAnalyticsComponent implements OnInit {
   };
   totalMessageCount = 'Loading...';
   totalSquadEvents = 'Loading...';
+  messageIncreasePercentage = 0;
+  channels: any;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -118,6 +81,7 @@ export class DashboardAnalyticsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // User Count
     this.apiService.getUserCount()
       .subscribe((result: any) => {
         this.userCount = result.count;
@@ -127,6 +91,7 @@ export class DashboardAnalyticsComponent implements OnInit {
         }
       });
 
+    // New users per day graph
     this.apiService.getNewUsersByDay()
       .subscribe((result: any) => {
         const data = result.sort((a, b) => Date.parse(a.date_trunc) - Date.parse(b.date_trunc));
@@ -145,16 +110,34 @@ export class DashboardAnalyticsComponent implements OnInit {
         }
       });
 
-    this.apiService.getTotalMessageCount()
+    // messages per day chart
+    this.apiService.getNewMessagesByDay()
       .subscribe((result: any) => {
-        this.totalMessageCount = `${(result.count / 1000).toFixed(1)}k`;
+        const data = result.sort((a, b) => Date.parse(a.date_trunc) - Date.parse(b.date_trunc));
+        let total = 0;
+
+        data.forEach(day => {
+          const count = parseInt(day.count, 0);
+          total += count;
+          this.messagesPerDay[0].data.push(count as any);
+        });
+
+        const lastDay = parseInt(data[data.length - 1].count, 0);
+        this.messageIncreasePercentage = Math.floor(lastDay / (total - lastDay) * 100);
+        this.totalMessageCount = `${(total / 1000).toFixed(1)}k`;
+
+        this.messagesPerDay = [
+          ...this.messagesPerDay,
+        ];
       });
 
+    // Squad Events total
     this.apiService.getTotalSquadEvents()
       .subscribe((result: any) => {
         this.totalSquadEvents = result.count;
       });
 
+    // Average Voice Time
     this.apiService.getAverageVoiceTime()
       .subscribe((result: any) => {
 
@@ -186,18 +169,10 @@ export class DashboardAnalyticsComponent implements OnInit {
         };
       });
 
-
-    setTimeout(() => {
-      const temp = [
-        {
-          name: 'Subscribers',
-          data: [55, 213, 55, 0, 213, 55, 33, 55]
-        },
-        {
-          name: ''
-        }
-      ];
-    }, 3000);
+    this.apiService.getAllChannels()
+      .subscribe((result: any) => {
+        this.channels = result;
+      });
   }
 
 }

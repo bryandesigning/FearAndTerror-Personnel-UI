@@ -34,12 +34,12 @@
     [value]="userCount"
   ></vex-widget-quick-value-center>
   <vex-widget-quick-value-center
-    [change]="0"
+    [change]="messageIncreasePercentage"
     [icon]="icComment"
     [color]="theme.colors.orange"
     gdColumn.lt-sm="1"
     label="Messages"
-    helpText="Percentage is currently not used"
+    helpText="Percentage is change over the last 7 days"
     [value]="totalMessageCount"
   ></vex-widget-quick-value-center>
   <vex-widget-quick-value-center
@@ -66,8 +66,20 @@
     [options]="discordUsersJoinedOptions"
     [series]="discordUsersJoined"
     [color]="theme.colors.primary"
+    gdColumn="span 2"
     gdColumn.lt-sm="1"
     label="New Discord users (Past 7 days)"
+    value="{{ discordUsersJoinedTotal }}"
+  ></vex-widget-quick-line-chart>
+
+  <vex-widget-quick-line-chart
+    [icon]="icComment"
+    [options]="messagesPerDayOptions"
+    [series]="messagesPerDay"
+    [color]="theme.colors.orange"
+    gdColumn="span 2"
+    gdColumn.lt-sm="1"
+    label="Discord Messages (Past 7 days)"
     value="{{ discordUsersJoinedTotal }}"
   ></vex-widget-quick-line-chart>
 
@@ -92,13 +104,19 @@
     gdColumn="3 / 5"
     gdColumn.lt-md="1 / -1"
     gdColumn.lt-sm="1"
-  ></vex-widget-large-chart>
+  ></vex-widget-large-chart> -->
 
-  <vex-widget-large-goal-chart
+  <!-- <vex-widget-large-goal-chart
     [series]="salesSeries"
     gdColumn="1 / -1"
     gdColumn.lt-sm="1"
     total="4,374"
   ></vex-widget-large-goal-chart> -->
+
+  <vex-channel-message-graph
+    [channels]="channels"
+    gdColumn="1 / -1"
+    gdColumn.lt-sm="1"
+  ></vex-channel-message-graph>
 
 </div>

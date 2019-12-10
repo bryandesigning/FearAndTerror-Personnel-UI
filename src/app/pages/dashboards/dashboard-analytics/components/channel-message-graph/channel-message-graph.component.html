@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="border-b py-4 px-6" fxLayout="row" fxLayoutAlign="start center">
+    <h2 class="m-0 title" fxFlex="auto">Messages By Channel</h2>
+
+    <button mat-icon-button type="button">
+      <mat-icon [icIcon]="icCloudDownload" class="text-secondary"></mat-icon>
+    </button>
+
+    <button mat-icon-button type="button">
+      <mat-icon [icIcon]="icMoreHoriz" class="text-secondary"></mat-icon>
+    </button>
+  </div>
+
+  <div class="py-6 px-6" fxLayout="row" fxLayout.lt-md="column">
+    <div class="pb-6 pt-4 px-6" fxFlex="auto" fxLayout="column">
+      <mat-form-field fxFlex="none">
+        <mat-label>Discord Channel</mat-label>
+        <mat-select (selectionChange)="handleChange($event)">
+          <mat-option [value]="channel" *ngFor="let channel of channels">{{ channel?.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50%" fxFlexOffset="48px">
+      <vex-chart [options]="options" [series]="series"></vex-chart>
+    </div>
+  </div>
+</div>

@@ -18,8 +18,16 @@ export class ApiService {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/users/new`, { params: { days: `${days}` } });
   }
 
+  public getNewMessagesByDay(days = 7, channelId = '') {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/messages/new`, { params: { days: `${days}`, channelId } });
+  }
+
   public getTotalVoiceEvents() {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/voice/count`);
+  }
+
+  public getAllChannels() {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/channels`, { params: { limit: '2000' }});
   }
 
   public getAverageVoiceTime() {

@@ -14,4 +14,8 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  handleSearch(search) {
+    console.log(`TODO: handle search - ${search}`);
+  }
 }
