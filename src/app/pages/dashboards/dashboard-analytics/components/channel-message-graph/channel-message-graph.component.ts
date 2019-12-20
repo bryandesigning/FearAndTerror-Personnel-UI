@@ -7,6 +7,8 @@ import faCaretUp from '@iconify/icons-fa-solid/caret-up';
 import faCaretDown from '@iconify/icons-fa-solid/caret-down';
 import theme from 'src/@vex/utils/tailwindcss';
 import { ApiService } from 'src/app/services/api.service';
+import icDelete from '@iconify/icons-ic/twotone-delete';
+
 
 @Component({
   selector: 'vex-channel-message-graph',
@@ -45,8 +47,8 @@ export class ChannelMessageGraphComponent implements OnInit {
   });
 
   days = 7;
-  selectedChannel = '';
   loadedChannels = [];
+  icDelete = icDelete;
 
   series: ApexAxisChartSeries = [{
     name: 'Messages Per Day',
@@ -79,8 +81,13 @@ export class ChannelMessageGraphComponent implements OnInit {
   }
 
   handleChange({ value }) {
-    this.selectedChannel = value;
-    this.loadChartData(value.channelId, value.name);
+    if (this.loadedChannels.length !== 5) {
+      this.loadChartData(value.channelId, value.name);
+    }
+  }
+
+  removeChannel(channel) {
+    this.loadedChannels = this.loadedChannels.filter(c => c.channelId !== channel.channelId);
   }
 
   loadChartData(channelId, name) {

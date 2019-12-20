@@ -19,6 +19,15 @@
           <mat-option [value]="channel" *ngFor="let channel of channels">{{ channel?.name }}</mat-option>
         </mat-select>
       </mat-form-field>
+
+      <div class="selected-channels">
+        <div class="channel" *ngFor="let channel of loadedChannels">
+          <span class="name">{{ channel?.name }}</span>
+          <button mat-icon-button type="button" (click)="removeChannel(channel)">
+            <mat-icon [icIcon]="icDelete" class="text-secondary"></mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div fxFlex="50%" fxFlexOffset="48px">

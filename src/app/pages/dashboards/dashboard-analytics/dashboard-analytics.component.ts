@@ -6,8 +6,6 @@ import icTimer from '@iconify/icons-ic/twotone-timer';
 import icComment from '@iconify/icons-ic/comment';
 import icvideogame_asset from '@iconify/icons-ic/twotone-videogame-asset';
 import { defaultChartOptions } from '../../../../@vex/utils/default-chart-options';
-import { Order, tableSalesData } from '../../../../static-data/table-sales-data';
-import { TableColumn } from '../../../../@vex/interfaces/table-column.interface';
 import icMoreVert from '@iconify/icons-ic/twotone-more-vert';
 import theme from '../../../../@vex/utils/tailwindcss';
 import { ApiService } from 'src/app/services/api.service';
@@ -87,7 +85,7 @@ export class DashboardAnalyticsComponent implements OnInit {
         this.userCount = result.count;
 
         if (this.discordUsersJoinedTotal > 0) {
-          this.userIncreasePercentage = this.discordUsersJoinedTotal / this.userCount * 100;
+          this.userIncreasePercentage = Math.floor(this.discordUsersJoinedTotal / this.userCount * 100);
         }
       });
 
@@ -106,7 +104,7 @@ export class DashboardAnalyticsComponent implements OnInit {
         ];
 
         if (this.userCount > 0) {
-          this.userIncreasePercentage = this.discordUsersJoinedTotal / this.userCount * 100;
+          this.userIncreasePercentage = Math.floor(this.discordUsersJoinedTotal / this.userCount * 100);
         }
       });
 

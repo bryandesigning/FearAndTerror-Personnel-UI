@@ -1,0 +1,20 @@
+.selected-channels {
+    .channel {
+        width: 100%;
+        background: rgba(92, 119, 255, 0.098);
+        border-radius: 5px;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 5px 0;
+
+        .name {
+            padding: 10px 0;
+        }
+
+        .mat-icon {
+            @apply text-red-500;
+        }
+    }
+}
