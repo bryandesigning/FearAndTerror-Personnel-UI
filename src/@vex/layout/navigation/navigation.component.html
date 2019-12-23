@@ -1,5 +1,11 @@
 <div class="navigation" fxLayout="row" fxLayoutAlign="space-between center" vexContainer>
   <vex-navigation-item *ngFor="let item of items" [item]="item"></vex-navigation-item>
-  <vex-toolbar-search (search)="handleSearch($event)"></vex-toolbar-search>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field appearance="outline" class="search" fxFlex="auto">
+      <mat-label>Search&hellip;</mat-label>
+      <input #input matInput (keyup.enter)="handleSearch()">
+    </mat-form-field>
+    <mat-icon [icIcon]="icSearch" (click)="handleSearch()"></mat-icon>
+  </div>
 </div>
 

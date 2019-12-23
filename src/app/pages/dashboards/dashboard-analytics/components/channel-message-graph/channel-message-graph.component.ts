@@ -88,6 +88,7 @@ export class ChannelMessageGraphComponent implements OnInit {
 
   removeChannel(channel) {
     this.loadedChannels = this.loadedChannels.filter(c => c.channelId !== channel.channelId);
+    this.drawGraph();
   }
 
   loadChartData(channelId, name) {

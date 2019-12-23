@@ -9,14 +9,30 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
 import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
+import { UserSearchComponent } from './pages/user-search/user-search.component';
+import { PageLayoutModule } from 'src/@vex/components/page-layout/page-layout.module';
+import { BreadcrumbsModule } from 'src/@vex/components/breadcrumbs/breadcrumbs.module';
+import {
+  MatTableModule,
+  MatPaginatorModule,
+  MatChipsModule,
+} from '@angular/material';
+import { ContainerModule } from 'src/@vex/directives/container/container.module';
+import { UserPageComponent } from './pages/user-page/user-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserSearchComponent, UserPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    PageLayoutModule,
+    BreadcrumbsModule,
+    MatTableModule,
+    ContainerModule,
+    MatPaginatorModule,
+    MatChipsModule,
 
     // Vex
     VexModule,

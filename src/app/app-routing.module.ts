@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { VexRoutes } from '../@vex/interfaces/vex-route.interface';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UserSearchComponent } from './pages/user-search/user-search.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
 
 const childrenRoutes: VexRoutes = [
   {
@@ -13,7 +15,17 @@ const childrenRoutes: VexRoutes = [
   {
     path: 'dashboards/analytics',
     loadChildren: () => import('./pages/dashboards/dashboard-analytics/dashboard-analytics.module').then(m => m.DashboardAnalyticsModule),
-    canActivate: [AuthGuard],
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'users/search',
+    component: UserSearchComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'user/:userId',
+    component: UserPageComponent,
+    canActivate: [ AuthGuard ],
   },
   // {
   //   path: 'apps',

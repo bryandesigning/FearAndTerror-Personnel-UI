@@ -20,7 +20,7 @@
         </mat-form-field>
         <mat-form-field fxFlex="grow">
           <mat-label>Password</mat-label>
-          <input [type]="inputType" formControlName="password" matInput required>
+          <input [type]="inputType" formControlName="password" matInput required (keyup.enter)="send()">
           <mat-error *ngIf="form.get('password').hasError('required')">We need a password to log you in</mat-error>
         </mat-form-field>
       </div>

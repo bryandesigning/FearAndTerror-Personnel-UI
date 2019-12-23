@@ -9,3 +9,20 @@
 .navigation {
   height: var(--navigation-height);
 }
+
+.mat-icon {
+  cursor: pointer;
+  margin-left: -40px;
+  @apply text-primary-500;
+}
+
+.search {
+  margin-top: 22px;
+  opacity: 0;
+  overflow: hidden;
+  width: 0;
+  margin-left: var(--padding-8);
+  margin-right: var(--padding-8);
+  opacity: 1;
+  width: 250px;
+}

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavigationService } from '../../services/navigation.service';
+import { ApiService } from 'src/app/services/api.service';
+import icSearch from '@iconify/icons-ic/twotone-search';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'vex-navigation',
@@ -9,13 +12,24 @@ import { NavigationService } from '../../services/navigation.service';
 export class NavigationComponent implements OnInit {
 
   items = this.navigationService.items;
+  icSearch = icSearch;
 
-  constructor(private navigationService: NavigationService) { }
+  @ViewChild('input', { read: ElementRef, static: true }) input: ElementRef;
+
+  constructor(
+    private navigationService: NavigationService,
+    private search: SearchService,
+  ) { }
 
   ngOnInit() {
   }
 
-  handleSearch(search) {
-    console.log(`TODO: handle search - ${search}`);
+  handleSearch() {
+    const search = this.input.nativeElement.value;
+    if (search === '') {
+      return;
+    }
+
+    this.search.findUser(search);
   }
 }

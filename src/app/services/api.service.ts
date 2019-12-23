@@ -41,4 +41,20 @@ export class ApiService {
   public getTotalSquadEvents() {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/squad/count`);
   }
+
+  public searchUser(params) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/search/users`, { params });
+  }
+
+  public getUser(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}`);
+  }
+
+  public getRoles() {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/roles`);
+  }
+
+  public getAllRoles() {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/roles`, { params: { limit: '2000' }});
+  }
 }

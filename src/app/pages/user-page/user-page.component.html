@@ -1,0 +1,22 @@
+
+<div
+class="p-gutter"
+gdColumns="1fr"
+gdGap="16px"
+vexContainer
+>
+
+  <div class="profile">
+    <h1>{{ user?.nickname || user?.username }} <span class="discord-id">Discord ID: {{ user?.userId }}</span></h1>
+
+    <div class="roles">
+      <mat-chip-list>
+        <ng-container *ngFor="let role of user?.roles">
+          <mat-chip *ngIf="!roles[role]?.roleName?.includes('⁣     ')">{{ roles[role]?.roleName }}</mat-chip>
+        </ng-container>
+      </mat-chip-list>
+    </div>
+    
+  </div>
+
+</div>

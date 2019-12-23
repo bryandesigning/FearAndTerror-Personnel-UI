@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { NavigationItemModule } from '../../components/navigation-item/navigation-item.module';
 import { ContainerModule } from '../../directives/container/container.module';
 import { ToolbarSearchModule } from 'src/@vex/components/toolbar-search/toolbar-search.module';
+import { MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ToolbarSearchModule } from 'src/@vex/components/toolbar-search/toolbar-
     NavigationItemModule,
     ContainerModule,
     ToolbarSearchModule,
+    MatInputModule,
   ],
   exports: [NavigationComponent]
 })
