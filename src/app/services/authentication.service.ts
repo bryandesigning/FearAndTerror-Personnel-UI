@@ -37,6 +37,16 @@ export class AuthenticationService {
       }));
   }
 
+  loginDiscord(code: string) {
+    return this.http.post<any>(`${environment.apiUrl}/v1.0/discord/login`, { code })
+      .pipe(map(user => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('currentUser', JSON.stringify({ ...user.data, roles: JSON.parse(user.data.roles) }));
+        this.currentUserSubject.next(user.data);
+        return user.data;
+      }));
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');

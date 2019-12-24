@@ -1,90 +1,56 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import icVisibility from '@iconify/icons-ic/twotone-visibility';
-import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { fadeInUp400ms } from '../../../../../@vex/animations/fade-in-up.animation';
-import { first } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
+import { ApiService } from 'src/app/services/api.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'vex-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     fadeInUp400ms
   ]
 })
 export class LoginComponent implements OnInit {
-
-  form: FormGroup;
-
-  inputType = 'password';
-  visible = false;
-
-  icVisibility = icVisibility;
-  icVisibilityOff = icVisibilityOff;
-
   returnUrl: string;
-  submitted = false;
-  loading = false;
-  error: any;
+  error: string;
+  code: any;
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private authenticationService: AuthenticationService,
-    private snackbar: MatSnackBar,
+    @Inject(DOCUMENT) private document: Document,
+    private auth: AuthenticationService,
   ) {}
 
   ngOnInit() {
-    this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-  }
+    this.code = this.route.snapshot.queryParams.code;
 
-  // convenience getter for easy access to form fields
-  get f() { return this.form.controls; }
-
-  send() {
-    // this.router.navigate(['/']);
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.form.invalid) {
-      return;
-    }
-
-    this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([ this.returnUrl ]);
-        },
-        error => {
-          this.error = error.error.message;
-          this.loading = false;
-        });
-  }
-
-  toggleVisibility() {
-    if (this.visible) {
-      this.inputType = 'password';
-      this.visible = false;
-      this.cd.markForCheck();
-    } else {
-      this.inputType = 'text';
-      this.visible = true;
-      this.cd.markForCheck();
+    if (this.code) {
+      this.auth.loginDiscord(this.code)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.router.navigate([ this.returnUrl ]);
+          },
+          error => {
+            if (error.includes('400')) {
+              return this.error = 'Missing required discord role(s)';
+            }
+            this.error = 'Discord Login Failed - Try again';
+          });
     }
   }
+
+  login() {
+    // tslint:disable-next-line: max-line-length
+    this.document.location.href = 'https://discordapp.com/api/oauth2/authorize?client_id=651122365006086144&redirect_uri=http%3A%2F%2Fpersonnel.squadhosting.com%2Flogin&response_type=code&scope=identify';
+  }
+
 }

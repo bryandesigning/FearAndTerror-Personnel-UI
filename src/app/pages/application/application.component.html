@@ -1,0 +1,101 @@
+<div class="application">
+  
+  <div class="logo">
+    <img src="https://media.discordapp.net/attachments/648401058464399360/651556696145264640/Logo2dark.png" width="175" />
+  </div>
+  
+  <div class="container">
+    <div class="title">
+      <iframe width="700" height="394" class="preview" src="https://www.youtube.com/embed/SfpNYcs9FOU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+      <p *ngIf="!submitted">
+        Below you'll find our application. We've already started filling in your discord information, so you just need to give us a little bit more information. <br/><br/>
+        <strong>We recommend putting some time into the application. The more thorough the answer, the better chance of it being accepted!</strong>
+        <br/><br/>
+      </p>
+    </div>
+    <form [formGroup]="form" class="application-form" *ngIf="form && !submitted" (submit)="submit()">
+      <div class="span-1">
+        <img class="discord-profile" src="https://cdn.discordapp.com/avatars/{{ session.id }}/{{ session.avatar }}.png" />
+      </div>
+      <div class="span-2"></div>
+      <mat-form-field>
+        <mat-label>Discord Username</mat-label>
+        <input formControlName="username" matInput readonly>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input formControlName="age" matInput type="number">
+      </mat-form-field>
+      <div class="span-3">
+        <label>Why would you like to join the group?</label>
+        <mat-form-field>
+          <textarea matInput rows="5" formControlName="why"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="span-3">
+        <label>What are you interested in?</label>
+        <mat-form-field>
+          <textarea matInput rows="5" formControlName="what" placeholder="(Hobbies)"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="span-3">
+        <label>What games do you mainly play?</label>
+        <mat-form-field>
+          <textarea matInput rows="5" formControlName="games" placeholder="(Must list Halo, Squad, Tarkov, Mordhau, or Rainbow 6 Siege)"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="span-3">
+        <label>What do you think you will bring into FaT?</label>
+        <mat-form-field>
+          <textarea matInput rows="5" formControlName="bring"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="span-3">
+        <label>Do you have any skills?</label>
+        <mat-form-field>
+          <textarea matInput rows="5" formControlName="skills" placeholder="(Programming, Adobe Suite, editing, etc.)"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="span-3">
+        <label>How long are you looking to be a part of the community?</label>
+        <mat-form-field>
+          <textarea matInput rows="5" formControlName="length"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="span-3">
+        <label>Lastly, how did you find out about us?</label>
+        <mat-form-field>
+          <textarea matInput rows="5" formControlName="found"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="span-2"></div>
+      <div class="span-1">
+        <button color="primary" mat-raised-button type="submit">
+          Submit Application
+        </button>
+      </div>
+    </form>
+    <div class="submitted" *ngIf="submitted">
+      <h1>We've recieved your application.</h1>
+
+      <br />
+      <p>
+        Here's what happens now...
+      </p>
+      <br />
+      <br />
+
+        <pre>
+<strong>1.) Staff will archive your application and will vote on its' quality for acceptance.</strong>
+      <span style="color:#B0B0B0;">What we look for in an application:
+          - Thorough responses
+          - Positive attitude</span>
+<strong>2.) After a decision has been made, you will receive the <span style="color:#d9eaff;">@Applicant</span> tag and
+      have access to the following applicant channels:</strong>
+          <span style="color:#B0B0B0;">- #applicant-information
+          - #applicants-general</span>
+<strong>3.) Review the information in #applicant-information and proceed from there</strong></pre>
+    </div>
+  </div>
+</div>

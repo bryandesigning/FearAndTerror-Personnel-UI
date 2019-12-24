@@ -16,14 +16,32 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatChipsModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
 } from '@angular/material';
 import { ContainerModule } from 'src/@vex/directives/container/container.module';
 import { UserPageComponent } from './pages/user-page/user-page.component';
+import { ApplicationComponent } from './pages/application/application.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApplicationsComponent } from './pages/applications/applications.component';
+import { ViewApplicationComponent } from './pages/applications/view-application/view-application.component';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
-  declarations: [AppComponent, UserSearchComponent, UserPageComponent],
+  declarations: [
+    AppComponent,
+    UserSearchComponent,
+    UserPageComponent,
+    ApplicationComponent,
+    ApplicationsComponent,
+    ViewApplicationComponent,
+  ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -33,6 +51,11 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
     ContainerModule,
     MatPaginatorModule,
     MatChipsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    MatButtonModule,
+    TimeagoModule.forRoot(),
 
     // Vex
     VexModule,

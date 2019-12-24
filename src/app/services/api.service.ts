@@ -57,4 +57,17 @@ export class ApiService {
   public getAllRoles() {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/roles`, { params: { limit: '2000' }});
   }
+
+  public getApplicationSession(uuid) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/discord/session`, { params: { uuid }});
+    // return this.httpClient.get(`http://api.personnel.squadhosting.com/v1.0/discord/session`, { params: { uuid }});
+  }
+
+  public getApplications(status = 'voting') {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications`, { params: { status }});
+  }
+
+  public submitApplication(data) {
+    return this.httpClient.post(`${environment.apiUrl}/v1.0/application/submit`, data);
+  }
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://activity.findbryan.com',
+  apiUrl: 'http://localhost:3000',
 };
 
 /*

@@ -8,36 +8,18 @@
 
     <div class="text-center mt-4">
       <h2 class="title m-0">Welcome back</h2>
-      <h4 class="body-2 text-secondary m-0">Sign in with your credentials below.</h4>
     </div>
 
-    <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
-      <div fxFlex="auto" fxLayout="column">
-        <mat-form-field fxFlex="grow">
-          <mat-label>Username</mat-label>
-          <input formControlName="username" matInput required>
-          <mat-error *ngIf="form.get('username').hasError('required')">We need a username to log you in</mat-error>
-        </mat-form-field>
-        <mat-form-field fxFlex="grow">
-          <mat-label>Password</mat-label>
-          <input [type]="inputType" formControlName="password" matInput required (keyup.enter)="send()">
-          <mat-error *ngIf="form.get('password').hasError('required')">We need a password to log you in</mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- <div fxLayout="row" fxLayoutAlign="space-between center">
-        <mat-checkbox class="caption" color="primary">Remember Me</mat-checkbox>
-        <a [routerLink]="['/forgot-password']" class="caption">Forgot Password?</a>
-      </div> -->
-
-      <button (click)="send()" color="primary" mat-raised-button type="button">
-        SIGN IN
-      </button>
-
-      <!-- <p class="text-secondary text-center">
-        Don't have an account?<br/>
-        <a [routerLink]="['/register']">Click here to create one</a>
-      </p> -->
+    <div class="p-6 text-center">
+      <p *ngIf="error" class="text-red-500">{{ error }}<br/><br/><br/></p>
+      <ng-container *ngIf="!code || error">
+        <button (click)="login()" color="primary" mat-raised-button type="button">
+          Discord Login
+        </button>
+      </ng-container>
+      <ng-container *ngIf="code">
+        <img *ngIf="!error" src="assets/img/25.gif" width="64" height="64" style="margin: 0 auto;" />
+      </ng-container>
     </div>
   </div>
 </div>

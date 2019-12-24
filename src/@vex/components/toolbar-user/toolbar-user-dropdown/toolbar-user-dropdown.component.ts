@@ -111,6 +111,7 @@ export class ToolbarUserDropdownComponent implements OnInit {
   icLock = icLock;
   icNotificationsOff = icNotificationsOff;
   username: string;
+  avatar = 'http://placehold.it/50x50';
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -121,6 +122,7 @@ export class ToolbarUserDropdownComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.userService.currentUsername;
+    this.avatar = `https://cdn.discordapp.com/avatars/${this.userService.currentUser.userId}/${this.userService.currentUser.avatar}.png`;
   }
 
   setStatus(status: OnlineStatus) {

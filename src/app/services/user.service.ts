@@ -7,6 +7,8 @@ export class UserService {
   currentUser: {
     token: string;
     username: string;
+    avatar: string;
+    userId: string;
   };
 
   constructor() {

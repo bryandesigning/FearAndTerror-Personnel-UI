@@ -5,6 +5,8 @@ import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UserSearchComponent } from './pages/user-search/user-search.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
+import { ApplicationComponent } from './pages/application/application.component';
+import { ApplicationsComponent } from './pages/applications/applications.component';
 
 const childrenRoutes: VexRoutes = [
   {
@@ -25,6 +27,11 @@ const childrenRoutes: VexRoutes = [
   {
     path: 'user/:userId',
     component: UserPageComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'applications',
+    component: ApplicationsComponent,
     canActivate: [ AuthGuard ],
   },
   // {
@@ -99,13 +106,13 @@ const childrenRoutes: VexRoutes = [
   //     }
   //   ]
   // },
-  {
-    path: 'ui',
-    children: [
-      {
-        path: 'components',
-        loadChildren: () => import('./pages/ui/components/components.module').then(m => m.ComponentsModule),
-      },
+  // {
+  //   path: 'ui',
+  //   children: [
+  //     {
+  //       path: 'components',
+  //       loadChildren: () => import('./pages/ui/components/components.module').then(m => m.ComponentsModule),
+  //     },
       // {
       //   path: 'forms/form-elements',
       //   loadChildren: () => import('./pages/ui/forms/form-elements/form-elements.module').then(m => m.FormElementsModule),
@@ -128,8 +135,8 @@ const childrenRoutes: VexRoutes = [
       //   path: 'page-layouts',
       //   loadChildren: () => import('./pages/ui/page-layouts/page-layouts.module').then(m => m.PageLayoutsModule),
       // },
-    ]
-  },
+  //   ]
+  // },
   {
     path: '**',
     loadChildren: () => import('./pages/pages/errors/error-404/error-404.module').then(m => m.Error404Module)
@@ -154,10 +161,14 @@ const routes: Routes = [
   //   loadChildren: () => import('./pages/pages/coming-soon/coming-soon.module').then(m => m.ComingSoonModule),
   // },
   {
+    path: 'application',
+    component: ApplicationComponent,
+  },
+  {
     path: '',
     component: CustomLayoutComponent,
     children: childrenRoutes
-  }
+  },
 ];
 
 @NgModule({

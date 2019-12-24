@@ -1,0 +1,22 @@
+.application-table {
+    width: 100%;
+
+    .mat-chip {
+        padding: 5px 10px;
+        border-radius: 25px;
+        text-transform: capitalize;
+
+        &.upvote {
+            background: #69BF64;
+        }
+
+        &.downvote {
+            background: #ff6961;
+        }
+    }
+
+    .underage {
+        color: red;
+        font-weight: bold;
+    }
+}

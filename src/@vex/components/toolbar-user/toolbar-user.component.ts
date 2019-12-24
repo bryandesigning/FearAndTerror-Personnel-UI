@@ -17,6 +17,7 @@ export class ToolbarUserComponent implements OnInit {
   username: string;
 
   theme = theme;
+  avatar = 'http://placehold.it/50x50';
 
   constructor(
     private popover: PopoverService,
@@ -26,6 +27,7 @@ export class ToolbarUserComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.userService.currentUsername;
+    this.avatar = `https://cdn.discordapp.com/avatars/${this.userService.currentUser.userId}/${this.userService.currentUser.avatar}.png`;
   }
 
   showPopover(originRef: HTMLElement) {
