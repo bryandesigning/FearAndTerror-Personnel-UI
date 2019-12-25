@@ -31,7 +31,16 @@ export class UserPageComponent implements OnInit {
         .subscribe(user => {
           this.user = user;
           this.user.roles = JSON.parse(this.user.roles);
+
+          this.getActivity();
         });
+    });
+  }
+
+  getActivity() {
+    this.api.getUserMessages(this.user.userId)
+    .subscribe(res => {
+      // console.log(res);
     });
   }
 

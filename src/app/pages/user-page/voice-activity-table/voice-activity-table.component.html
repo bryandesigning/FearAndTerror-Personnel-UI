@@ -1,0 +1,27 @@
+
+<table mat-table [dataSource]="voiceActivity" class="voice-table">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="channel">
+    <th mat-header-cell *matHeaderCellDef> Channel </th>
+    <td mat-cell *matCellDef="let element"> {{ element?.channelName }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef> Duration </th>
+    <td mat-cell *matCellDef="let element"> {{ element?.time | durationPipe }} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element"> {{ element?.createdAt | date:'short' }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [length]="count" [pageSize]="limit" (page)="pageChange($event)" [disabled]="pendingLoad"></mat-paginator>

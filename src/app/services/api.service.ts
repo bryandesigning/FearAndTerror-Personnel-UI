@@ -50,6 +50,21 @@ export class ApiService {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}`);
   }
 
+  public getUserVoice(userId, page = 0) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}/voice`,
+    {
+      params: {
+        page,
+        orderBy: 'createdAt',
+        direction: 'DESC',
+      } as any,
+    });
+  }
+
+  public getUserMessages(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}/messages`);
+  }
+
   public getRoles() {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/roles`);
   }

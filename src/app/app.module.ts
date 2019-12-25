@@ -19,6 +19,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
+  MatTabsModule,
 } from '@angular/material';
 import { ContainerModule } from 'src/@vex/directives/container/container.module';
 import { UserPageComponent } from './pages/user-page/user-page.component';
@@ -28,6 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationsComponent } from './pages/applications/applications.component';
 import { ViewApplicationComponent } from './pages/applications/view-application/view-application.component';
 import { TimeagoModule } from 'ngx-timeago';
+import { VoiceActivityTableComponent } from './pages/user-page/voice-activity-table/voice-activity-table.component';
+import { DurationPipePipe } from './duration-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import { TimeagoModule } from 'ngx-timeago';
     ApplicationComponent,
     ApplicationsComponent,
     ViewApplicationComponent,
+    VoiceActivityTableComponent,
+    DurationPipePipe,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,7 @@ import { TimeagoModule } from 'ngx-timeago';
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
     CommonModule,
     MatButtonModule,
     TimeagoModule.forRoot(),
