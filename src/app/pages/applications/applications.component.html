@@ -27,7 +27,8 @@ vexContainer
     <!-- Weight Column -->
     <ng-container matColumnDef="age">
       <th mat-header-cell *matHeaderCellDef> Age </th>
-      <td mat-cell *matCellDef="let element" [ngClass]="{ 'underage': ((element?.age | number) < 18)}"> {{ element?.age | number }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element?.age | number }} </td>
+      <!-- [ngClass]="{ 'underage': (element?.age | number) < 18}" -->
     </ng-container>
 
     <!-- Symbol Column -->
