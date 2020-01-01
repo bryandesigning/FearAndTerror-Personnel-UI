@@ -1,0 +1,47 @@
+.discord-id {
+    font-size: 12px;
+    color: grey;
+}
+
+.questions {
+    margin-top: 20px;
+    .question {
+        display: block;
+        margin-top: 5px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .answer {
+        background: rgba(0,0,0,0.25);
+        width: 100%;
+        padding: 20px;
+        margin: 20px;
+    }
+}
+
+.mat-chip {
+    padding: 5px 10px;
+    border-radius: 25px;
+    text-transform: capitalize;
+    margin: 5px;
+    cursor: pointer;
+
+    &.upvote {
+        border: 2px solid #69BF64;
+        background: rgba(0,0,0,0);
+
+        &.active {
+            background: #69BF64;
+        }
+    }
+
+    &.downvote {
+        border: 2px solid #ff6961;
+        background: rgba(0,0,0,0);
+
+        &.active {
+            background: #ff6961;
+        }
+    }
+}

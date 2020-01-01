@@ -65,6 +65,12 @@ export class AppComponent {
         route: '/dashboards/analytics',
         icon: icLayers
       },
+      {
+        type: 'link',
+        label: 'Applications',
+        route: '/applications',
+        icon: icLayers
+      },
     ];
   }
 }

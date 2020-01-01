@@ -10,7 +10,7 @@ export class VoiceActivityTableComponent implements OnInit {
 
   @Input() userId: number;
 
-  displayedColumns: string[] = [ 'channel', 'time', 'date' ];
+  displayedColumns: string[] = [ 'channel', 'time', 'jointime', 'leavetime', 'date' ];
   voiceActivity: any[];
   count = 0;
   limit = 20;

@@ -7,6 +7,7 @@ import { UserSearchComponent } from './pages/user-search/user-search.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { ApplicationComponent } from './pages/application/application.component';
 import { ApplicationsComponent } from './pages/applications/applications.component';
+import { ApplicationViewComponent } from './pages/application-view/application-view.component';
 
 const childrenRoutes: VexRoutes = [
   {
@@ -31,8 +32,17 @@ const childrenRoutes: VexRoutes = [
   },
   {
     path: 'applications',
-    component: ApplicationsComponent,
     canActivate: [ AuthGuard ],
+    children: [
+      {
+        path: ':appId',
+        component: ApplicationViewComponent,
+      },
+      {
+        path: '',
+        component: ApplicationsComponent,
+      },
+    ],
   },
   // {
   //   path: 'apps',

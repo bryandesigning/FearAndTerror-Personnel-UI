@@ -61,8 +61,20 @@ export class ApiService {
     });
   }
 
+  public getUserVoiceAverage(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}/voice/average`);
+  }
+
+  public getUserVoiceDaily(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}/voice/daily`);
+  }
+
   public getUserMessages(userId) {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}/messages`);
+  }
+
+  public getUserMessagesDaily(userId, days = 7) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}/messages/daily`, { params: { days } as any });
   }
 
   public getRoles() {
@@ -84,5 +96,13 @@ export class ApiService {
 
   public submitApplication(data) {
     return this.httpClient.post(`${environment.apiUrl}/v1.0/application/submit`, data);
+  }
+
+  public getApplication(appId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications/${appId}`);
+  }
+
+  public voteApplication(appId, upvote: boolean) {
+    return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}/vote`, { upvote });
   }
 }

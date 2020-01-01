@@ -27,10 +27,12 @@ import { ApplicationComponent } from './pages/application/application.component'
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationsComponent } from './pages/applications/applications.component';
-import { ViewApplicationComponent } from './pages/applications/view-application/view-application.component';
 import { TimeagoModule } from 'ngx-timeago';
 import { VoiceActivityTableComponent } from './pages/user-page/voice-activity-table/voice-activity-table.component';
 import { DurationPipePipe } from './duration-pipe.pipe';
+import { WidgetQuickLineChartModule } from 'src/@vex/components/widgets/widget-quick-line-chart/widget-quick-line-chart.module';
+import { ApplicationViewComponent } from './pages/application-view/application-view.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,9 @@ import { DurationPipePipe } from './duration-pipe.pipe';
     UserPageComponent,
     ApplicationComponent,
     ApplicationsComponent,
-    ViewApplicationComponent,
     VoiceActivityTableComponent,
     DurationPipePipe,
+    ApplicationViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,8 @@ import { DurationPipePipe } from './duration-pipe.pipe';
     MatTabsModule,
     CommonModule,
     MatButtonModule,
+    WidgetQuickLineChartModule,
+    FlexLayoutModule,
     TimeagoModule.forRoot(),
 
     // Vex

@@ -16,6 +16,18 @@
   </ng-container>
 
   <!-- Weight Column -->
+  <ng-container matColumnDef="jointime">
+    <th mat-header-cell *matHeaderCellDef> Join Time </th>
+    <td mat-cell *matCellDef="let element"> {{ element?.jointime | date:'shortTime' }} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="leavetime">
+    <th mat-header-cell *matHeaderCellDef> Leave Time </th>
+    <td mat-cell *matCellDef="let element"> {{ element?.leavetime | date:'shortTime' }} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef> Date </th>
     <td mat-cell *matCellDef="let element"> {{ element?.createdAt | date:'short' }} </td>

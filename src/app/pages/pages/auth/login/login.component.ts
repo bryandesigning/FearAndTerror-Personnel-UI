@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     // tslint:disable-next-line: max-line-length
-    this.document.location.href = 'https://discordapp.com/api/oauth2/authorize?client_id=651122365006086144&redirect_uri=http%3A%2F%2Fpersonnel.squadhosting.com%2Flogin&response_type=code&scope=identify';
+    this.document.location.href = 'https://discordapp.com/api/oauth2/authorize?client_id=651122365006086144&redirect_uri=http%3A%2F%2Fpersonnel.fearandterror.com%2Flogin&response_type=code&scope=identify';
   }
 
 }

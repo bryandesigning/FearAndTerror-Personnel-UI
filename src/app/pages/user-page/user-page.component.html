@@ -19,9 +19,30 @@ vexContainer
 
     <mat-tab-group>
       <mat-tab label="Voice Activity">
+        <vex-widget-quick-line-chart
+          [icon]="icGroup"
+          [options]="voicePerDayOptions"
+          [series]="voicePerDay"
+          [color]="theme.colors.orange"
+          gdColumn="span 2"
+          gdColumn.lt-sm="1"
+          label="Average Voice Time (past 7 days)"
+          value="{{ voiceWeeklyAverage }}"
+        ></vex-widget-quick-line-chart>
         <vex-voice-activity-table [userId]="user?.userId" *ngIf="user"></vex-voice-activity-table>
       </mat-tab>
-      <mat-tab label="Message Activity"> Content 2 </mat-tab>
+      <mat-tab label="Message Activity">
+        <vex-widget-quick-line-chart
+          [icon]="icComment"
+          [options]="messagesPerDayOptions"
+          [series]="messagesPerDay"
+          [color]="theme.colors.orange"
+          gdColumn="span 2"
+          gdColumn.lt-sm="1"
+          label="Average Daily Messages (past 7 days)"
+          value="{{ messagesWeeklyAverage }}"
+        ></vex-widget-quick-line-chart>
+      </mat-tab>
     </mat-tab-group>
 
     

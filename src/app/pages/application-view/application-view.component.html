@@ -1,0 +1,51 @@
+
+<div
+  class="p-gutter"
+  gdColumns="1fr 1fr"
+  gdGap="16px"
+  vexContainer
+  *ngIf="application"
+>
+  <div gdColumn="span 1">
+    <h1>@{{ application?.username }} <span class="discord-id">{{ application?.userId }}</span></h1>
+    <h3>{{ application?.age }} Years Old</h3>
+  </div>
+  <div gdColumn="span 1" fxLayout="row" fxLayoutAlign="end center">
+    <mat-chip class="status">{{ application?.status }}</mat-chip>
+    <mat-chip class="profile" [routerLink]="['/user', application?.userId ]">Profile</mat-chip>
+    <mat-chip class="upvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] }" (click)="vote(true)">{{ application?.upvotes }}</mat-chip>
+    <mat-chip class="downvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] == false }" (click)="vote(false)">{{ application?.downvotes }}</mat-chip>
+  </div>
+ 
+  <ul class="questions" gdColumn="1 / -1">
+    <li>
+      <div class="question">Why would you like to join the group?</div>
+      <div class="answer">{{ application?.why }}</div>
+    </li>
+    <li>
+      <div class="question">What are you interested in?</div>
+      <div class="answer">{{ application?.what }}</div>
+    </li>
+    <li>
+      <div class="question">What games do you mainly play?</div>
+      <div class="answer">{{ application?.games }}</div>
+    </li>
+    <li>
+      <div class="question">What do you think you will bring into FaT?</div>
+      <div class="answer">{{ application?.bring }}</div>
+    </li>
+    <li>
+      <div class="question">Do you have any skills?</div>
+      <div class="answer">{{ application?.skills }}</div>
+    </li>
+    <li>
+      <div class="question">How long are you looking to be a part of the community?</div>
+      <div class="answer">{{ application?.length }}</div>
+    </li>
+    <li>
+      <div class="question">Lastly, how did you find out about us?</div>
+      <div class="answer">{{ application?.found }}</div>
+    </li>
+  </ul>
+  
+</div>
