@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://api.personnel.squadhosting.com',
+  apiUrl: 'http://api.fearandterror.com',
 };
