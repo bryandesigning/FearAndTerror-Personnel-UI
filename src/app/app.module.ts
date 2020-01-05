@@ -20,6 +20,7 @@ import {
   MatInputModule,
   MatButtonModule,
   MatTabsModule,
+  MatSelectModule,
 } from '@angular/material';
 import { ContainerModule } from 'src/@vex/directives/container/container.module';
 import { UserPageComponent } from './pages/user-page/user-page.component';
@@ -33,6 +34,9 @@ import { DurationPipePipe } from './duration-pipe.pipe';
 import { WidgetQuickLineChartModule } from 'src/@vex/components/widgets/widget-quick-line-chart/widget-quick-line-chart.module';
 import { ApplicationViewComponent } from './pages/application-view/application-view.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { UserNotesComponent } from './pages/user-page/user-notes/user-notes.component';
+import { UserFormComponent } from './pages/user-page/user-form/user-form.component';
+import { ToastNotificationsModule } from 'ngx-toast-notifications';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     VoiceActivityTableComponent,
     DurationPipePipe,
     ApplicationViewComponent,
+    UserNotesComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +57,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastNotificationsModule,
     HttpClientModule,
     PageLayoutModule,
     BreadcrumbsModule,
@@ -65,6 +72,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     WidgetQuickLineChartModule,
     FlexLayoutModule,
+    MatSelectModule,
     TimeagoModule.forRoot(),
 
     // Vex

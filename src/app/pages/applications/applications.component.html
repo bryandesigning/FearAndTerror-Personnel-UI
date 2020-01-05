@@ -1,13 +1,17 @@
 
-<div
-class="p-gutter"
-gdColumns="1fr"
-vexContainer
->
-  <div class="filter">
-    filter here
-  </div>
+<div class="p-gutter filter" vexContainer>
+  <mat-select [value]="currentStatus" (selectionChange)="handleChange($event)">
+    <mat-option *ngFor="let status of statuses" [value]="status">
+      {{ status }}
+    </mat-option>
+  </mat-select>
+</div>
 
+<div
+  class="p-gutter"
+  gdColumns="1fr"
+  vexContainer
+>
   <table mat-table [dataSource]="applications" class="application-table">
 
     <!--- Note that these columns can be defined in any order.
@@ -73,5 +77,4 @@ vexContainer
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [length]="count" [pageSize]="limit" (page)="pageChange($event)" [disabled]="pendingLoad"></mat-paginator>
-
 </div>

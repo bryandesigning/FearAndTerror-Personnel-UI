@@ -8,6 +8,9 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ApplicationsComponent implements OnInit {
 
+  statuses: string[] = [ 'voting', 'vote-review', 'pending-interview', 'paused', 'accepted', 'denied' ];
+  currentStatus = 'voting';
+
   displayedColumns: string[] = [ 'status', 'username', 'age', 'upvotes', 'downvotes', 'created', 'updated', 'expand' ];
   applications: any[];
   count = 0;
@@ -20,19 +23,28 @@ export class ApplicationsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.api.getApplications()
+    this.getApplications();
+  }
+
+  getApplications() {
+    this.pendingLoad = true;
+    this.api.getApplications(this.currentStatus)
       .subscribe((res: any) => {
-        if (res.count) {
+        if (res.count >= 0) {
           this.pendingLoad = false;
           this.count = res.count;
           this.limit = res.limit;
           this.offset = res.offset;
           this.applications = res.rows;
         }
-        console.log(res);
       }, err => {
-        console.log(err);
+        this.pendingLoad = false;
       });
+  }
+
+  handleChange(event) {
+    this.currentStatus = event.value;
+    this.getApplications();
   }
 
   pageChange(event) {

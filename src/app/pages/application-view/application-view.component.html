@@ -1,4 +1,3 @@
-
 <div
   class="p-gutter"
   gdColumns="1fr 1fr"
@@ -11,10 +10,14 @@
     <h3>{{ application?.age }} Years Old</h3>
   </div>
   <div gdColumn="span 1" fxLayout="row" fxLayoutAlign="end center">
-    <mat-chip class="status">{{ application?.status }}</mat-chip>
     <mat-chip class="profile" [routerLink]="['/user', application?.userId ]">Profile</mat-chip>
     <mat-chip class="upvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] }" (click)="vote(true)">{{ application?.upvotes }}</mat-chip>
     <mat-chip class="downvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] == false }" (click)="vote(false)">{{ application?.downvotes }}</mat-chip>
+    <mat-select class="selection" [value]="application?.status" (selectionChange)="updateApplicationStatus($event)">
+      <mat-option *ngFor="let status of statuses" [value]="status" class="selection-option">
+        {{ status }}
+      </mat-option>
+    </mat-select>
   </div>
  
   <ul class="questions" gdColumn="1 / -1">

@@ -17,6 +17,8 @@ vexContainer
       </mat-chip-list>
     </div>
 
+    <vex-user-form [user]="user"></vex-user-form>    
+
     <mat-tab-group>
       <mat-tab label="Voice Activity">
         <vex-widget-quick-line-chart
@@ -42,6 +44,85 @@ vexContainer
           label="Average Daily Messages (past 7 days)"
           value="{{ messagesWeeklyAverage }}"
         ></vex-widget-quick-line-chart>
+      </mat-tab>
+      <mat-tab label="User History">
+        <h1>User History Here</h1>
+      </mat-tab>
+      <mat-tab label="Staff Notes">
+        <h1>User Notes here</h1>
+      </mat-tab>
+      <mat-tab label="Applications">
+        <div
+          class="p-gutter"
+          gdColumns="1fr"
+          vexContainer
+        >
+          <table mat-table [dataSource]="applications" class="application-table">
+        
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip color="primary" selected>{{ element?.status }}</mat-chip>
+              </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef> Username </th>
+              <td mat-cell *matCellDef="let element"> {{ element?.username }} </td>
+            </ng-container>
+        
+            <!-- Weight Column -->
+            <ng-container matColumnDef="age">
+              <th mat-header-cell *matHeaderCellDef> Age </th>
+              <td mat-cell *matCellDef="let element"> {{ element?.age | number }} </td>
+              <!-- [ngClass]="{ 'underage': (element?.age | number) < 18}" -->
+            </ng-container>
+        
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="upvotes">
+              <th mat-header-cell *matHeaderCellDef> Upvotes </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip class="upvote">{{ element?.upvotes | number }}</mat-chip>
+              </td>
+            </ng-container>
+        
+            <!-- Profile Column -->
+            <ng-container matColumnDef="downvotes">
+              <th mat-header-cell *matHeaderCellDef> Downvotes </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip class="downvote">{{ element?.downvotes }}</mat-chip>
+              </td>
+            </ng-container>
+        
+            <!-- Profile Column -->
+            <ng-container matColumnDef="created">
+              <th mat-header-cell *matHeaderCellDef> Submitted </th>
+              <td mat-cell *matCellDef="let element"> {{ element?.createdAt | date:'short' }} </td>
+            </ng-container>
+        
+            <!-- Profile Column -->
+            <ng-container matColumnDef="updated">
+              <th mat-header-cell *matHeaderCellDef> Last Updated </th>
+              <td mat-cell *matCellDef="let element"> {{ element?.updatedAt | timeago }} </td>
+            </ng-container>
+        
+            <!-- View Column -->
+            <ng-container matColumnDef="expand">
+              <th mat-header-cell *matHeaderCellDef> View </th>
+              <td mat-cell *matCellDef="let element">
+                <button color="primary" mat-button type="button" [routerLink]="['/applications', element?.id ]">View Application</button>
+              </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [length]="count" [pageSize]="limit" (page)="pageChange($event)" [disabled]="pendingLoad"></mat-paginator>
+        </div>
       </mat-tab>
     </mat-tab-group>
 

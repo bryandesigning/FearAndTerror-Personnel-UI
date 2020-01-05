@@ -50,6 +50,10 @@ export class ApiService {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}`);
   }
 
+  public updateUser(userId, changes) {
+    return this.httpClient.post(`${environment.apiUrl}/v1.0/users/${userId}`, changes);
+  }
+
   public getUserVoice(userId, page = 0) {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/users/${userId}/voice`,
     {
@@ -94,15 +98,23 @@ export class ApiService {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/applications`, { params: { status }});
   }
 
+  public getUserApplications(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications/${userId}`);
+  }
+
   public submitApplication(data) {
     return this.httpClient.post(`${environment.apiUrl}/v1.0/application/submit`, data);
   }
 
   public getApplication(appId) {
-    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications/${appId}`);
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/application/${appId}`);
   }
 
   public voteApplication(appId, upvote: boolean) {
     return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}/vote`, { upvote });
+  }
+
+  public updateApplication(appId, status) {
+    return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}`, { status });
   }
 }

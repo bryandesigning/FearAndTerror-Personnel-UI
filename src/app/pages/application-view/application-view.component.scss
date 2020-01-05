@@ -45,3 +45,15 @@
         }
     }
 }
+
+.selection {
+    max-width: 200px;
+    background: rgba(0,0,0,0.25);
+    padding: 15px;
+    margin-left: 20px;
+    text-transform: capitalize;
+}
+
+.selection-option {
+    text-transform: capitalize;
+}

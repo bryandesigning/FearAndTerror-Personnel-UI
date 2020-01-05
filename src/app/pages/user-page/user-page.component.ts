@@ -54,6 +54,13 @@ export class UserPageComponent implements OnInit {
     data: [],
   }];
 
+  displayedColumns: string[] = [ 'status', 'username', 'age', 'upvotes', 'downvotes', 'created', 'updated', 'expand' ];
+  applications: any[];
+  count = 0;
+  limit = 20;
+  offset = 0;
+  pendingLoad = true;
+
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
@@ -69,10 +76,13 @@ export class UserPageComponent implements OnInit {
 
     this.route.params.subscribe(params => {
        this.userId = params.userId;
+       this.getApplications();
        this.api.getUser(this.userId)
         .subscribe(user => {
           this.user = user;
           this.user.roles = JSON.parse(this.user.roles);
+
+          console.log(this.user);
 
           this.getActivity();
           this.getAverageVoiceTime();
@@ -91,7 +101,6 @@ export class UserPageComponent implements OnInit {
   getDailyMessages() {
     this.api.getUserMessagesDaily(this.user.userId)
       .subscribe((result: any) => {
-        console.log(result);
         const data = result.sort((a, b) => Date.parse(a.date_trunc) - Date.parse(b.date_trunc));
         let total = 0;
 
@@ -132,6 +141,29 @@ export class UserPageComponent implements OnInit {
     const seconds = inputSeconds - (hours * 3600) - (minutes * 60);
 
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  getApplications() {
+    this.pendingLoad = true;
+    this.api.getUserApplications(this.userId)
+      .subscribe((res: any) => {
+        if (res.count >= 0) {
+          this.pendingLoad = false;
+          this.count = res.count;
+          this.limit = res.limit;
+          this.offset = res.offset;
+          this.applications = res.rows;
+        }
+      }, err => {
+        this.pendingLoad = false;
+      });
+  }
+
+  pageChange(event) {
+    if (!this.pendingLoad) {
+      this.pendingLoad = true;
+      // this.search.findUserPaginate(this.limit, event.pageIndex);
+    }
   }
 
 }

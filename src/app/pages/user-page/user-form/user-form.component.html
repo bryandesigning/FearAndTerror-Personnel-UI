@@ -1,0 +1,11 @@
+<form [formGroup]="form" class="user-form" *ngIf="form" (submit)="submit()">
+  <mat-form-field>
+    <mat-label>SteamID (64bit)</mat-label>
+    <input formControlName="steamId" matInput type="text">
+  </mat-form-field>
+  <div>
+    <button color="primary" mat-raised-button type="submit" [disabled]="form?.invalid || form?.value?.steamId === user?.steamId">
+      Save Changes
+    </button>
+  </div>
+</form>
