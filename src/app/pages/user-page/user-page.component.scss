@@ -1,6 +1,6 @@
 .mat-chip {
     font-size: 10px;
-    padding: 3px 5px;
+    padding: 3px 8px;
     min-height: 20px;
 }
 
@@ -33,5 +33,15 @@
     .underage {
         color: red;
         font-weight: bold;
+    }
+}
+
+.profile {
+    .avatar {
+        float: left;
+        width: 8em;
+        height: 8em;
+        border-radius: 8em;
+        margin: 0 20px 20px 0;
     }
 }

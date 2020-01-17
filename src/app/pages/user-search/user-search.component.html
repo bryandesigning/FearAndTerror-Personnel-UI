@@ -14,7 +14,7 @@ vexContainer
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{ element?.nickname || element?.username }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element?.nickname || '@' + element?.username }} <span class="discord-username">{{ element?.nickname ? '(@' + element?.username + ')' : '' }}</span></td>
     </ng-container>
 
     <!-- Weight Column -->

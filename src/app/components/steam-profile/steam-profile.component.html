@@ -1,0 +1,10 @@
+<a [href]="steamData?.profileurl" *ngIf="steamData">
+  <div class="steam">
+    <img [src]="steamData?.avatarfull" [ngClass]="{ 'online': steamData?.personastate >= 1, 'offline': steamData?.personastate === 0 }" />
+    <div class="name">
+      {{ steamData?.personaname }}<br />
+      <span>{{ steamData?.steamid }}</span>
+      <span>{{ steamBans?.VACBanned ? steamBans?.NumberOfVACBans + ' VAC Bans - ' + steamBans?.DaysSinceLastBan + ' days ago ' : '0 VAC Bans ' }} | {{ steamBans?.NumberOfGameBans }} Game Bans</span>
+    </div>
+  </div>
+</a>

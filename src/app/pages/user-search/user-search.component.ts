@@ -28,14 +28,11 @@ export class UserSearchComponent implements OnInit {
 
   ngOnInit() {
     this.search.searchResults.subscribe(res => {
-      if (res.count) {
-        this.pendingLoad = false;
-        this.count = res.count;
-        this.limit = res.limit;
-        this.offset = res.offset;
-        this.searchResults = res.rows;
-      }
-      console.log(res);
+      this.pendingLoad = false;
+      this.count = res.count;
+      this.limit = res.limit;
+      this.offset = res.offset;
+      this.searchResults = res.rows;
     });
   }
 

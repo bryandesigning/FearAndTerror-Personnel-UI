@@ -82,8 +82,6 @@ export class UserPageComponent implements OnInit {
           this.user = user;
           this.user.roles = JSON.parse(this.user.roles);
 
-          console.log(this.user);
-
           this.getActivity();
           this.getAverageVoiceTime();
           this.getDailyMessages();

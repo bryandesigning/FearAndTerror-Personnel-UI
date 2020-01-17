@@ -117,4 +117,12 @@ export class ApiService {
   public updateApplication(appId, status) {
     return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}`, { status });
   }
+
+  public getSteamData(steamId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/steam/getUsers`, { params: { steamIds: steamId }});
+  }
+
+  public getSteamBanData(steamId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/steam/getUserBans`, { params: { steamIds: steamId }});
+  }
 }
