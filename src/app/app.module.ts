@@ -21,6 +21,8 @@ import {
   MatButtonModule,
   MatTabsModule,
   MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 import { ContainerModule } from 'src/@vex/directives/container/container.module';
 import { UserPageComponent } from './pages/user-page/user-page.component';
@@ -37,6 +39,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserNotesComponent } from './pages/user-page/user-notes/user-notes.component';
 import { UserFormComponent } from './pages/user-page/user-form/user-form.component';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
+import { ApplicationInterviewComponent } from './pages/application-interview/application-interview.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
     ApplicationViewComponent,
     UserNotesComponent,
     UserFormComponent,
+    ApplicationInterviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,8 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
     MatButtonModule,
     WidgetQuickLineChartModule,
     FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatSelectModule,
     TimeagoModule.forRoot(),
 

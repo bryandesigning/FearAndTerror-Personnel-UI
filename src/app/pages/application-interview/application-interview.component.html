@@ -1,0 +1,24 @@
+<div
+  class="p-gutter"
+  gdColumns="1fr 1fr"
+  gdGap="16px"
+  vexContainer
+  *ngIf="application"
+>
+  <div gdColumn="span 1">
+    <h1>@{{ application?.username }} <span class="discord-id">{{ application?.userId }}</span></h1>
+    <h3>{{ application?.age }} Years Old</h3>
+  </div>
+  <div gdColumn="span 1" fxLayout="row" fxLayoutAlign="end center">
+    <mat-chip class="profile" [routerLink]="['/user', application?.userId ]">Profile</mat-chip>
+    <mat-chip class="upvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] }">{{ application?.upvotes }}</mat-chip>
+    <mat-chip class="downvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] == false }">{{ application?.downvotes }}</mat-chip>
+    <mat-select class="selection" [value]="application?.status" (selectionChange)="updateApplicationStatus($event)" disabled="true">
+      <mat-option *ngFor="let status of statuses" [value]="status" class="selection-option">
+        {{ status }}
+      </mat-option>
+    </mat-select>
+  </div>
+
+  <vex-user-form [user]="user" gdColumn="1 / -1" [interview]="true"></vex-user-form>
+</div>
