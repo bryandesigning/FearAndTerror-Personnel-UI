@@ -1,0 +1,9 @@
+<a [href]="steamData?.profileurl" *ngIf="steamData">
+  <div class="steam">
+    <img [src]="steamData?.avatarfull" [ngClass]="{ 'online': steamData?.personastate >= 1, 'offline': steamData?.personastate === 0 }" />
+    <div class="name">
+      {{ steamData?.personaname }}<br />
+      <span>{{ steamData?.steamid }}</span>
+    </div>
+  </div>
+</a>

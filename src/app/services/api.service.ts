@@ -120,6 +120,6 @@ export class ApiService {
 
   public getSteamData(steamId) {
     // tslint:disable-next-line: max-line-length
-    return this.httpClient.get(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=06BA68891EC7424A7BF3B1ED6D2EB61C&steamids=${steamId}`);
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/steam/getUsers`, { params: { steamIds: steamId }});
   }
 }

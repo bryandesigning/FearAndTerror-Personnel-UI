@@ -40,6 +40,7 @@ import { UserNotesComponent } from './pages/user-page/user-notes/user-notes.comp
 import { UserFormComponent } from './pages/user-page/user-form/user-form.component';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { ApplicationInterviewComponent } from './pages/application-interview/application-interview.component';
+import { SteamProfileComponent } from './components/steam-profile/steam-profile.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ApplicationInterviewComponent } from './pages/application-interview/app
     UserNotesComponent,
     UserFormComponent,
     ApplicationInterviewComponent,
+    SteamProfileComponent,
   ],
   imports: [
     BrowserModule,

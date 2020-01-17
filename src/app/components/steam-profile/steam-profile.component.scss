@@ -1,0 +1,32 @@
+.steam {
+    width: 350px;
+    height: 80px;
+    background: #1d1d1d;
+    border-radius: 5px;
+    float: right;
+
+    img {
+        width: 60px;
+        margin: 10px;
+        border-radius: 5px;
+        border: 2px solid #1d1d1d;
+        display: inline-block;
+
+        &.online {
+            border-color: #7da10e;
+        }
+
+        &.offline {
+            border-color: #3b3b38;
+        }
+    }
+
+    .name {
+        display: inline-block;
+
+        span {
+            font-size: 12px;
+            color: grey;
+        }
+    }
+}

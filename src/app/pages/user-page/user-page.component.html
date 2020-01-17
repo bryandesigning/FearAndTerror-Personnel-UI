@@ -7,6 +7,7 @@ vexContainer
 >
 
   <div class="profile">
+    <vex-steam-profile [steamId]="user?.steamId"></vex-steam-profile>
     <img class="avatar" *ngIf="user?.userId && user?.avatar" [src]="'https://cdn.discordapp.com/avatars/' + user?.userId + '/' + user?.avatar + '.png'" />
     <img class="avatar" *ngIf="!user?.userId || !user?.avatar" src="http://placehold.it/250x250" />
     <h1>{{ user?.nickname || user?.username }} <span class="discord-id">{{ user?.nickname ? '(@' + user?.username + ')' : '' }} Discord ID: {{ user?.userId }}</span></h1>
