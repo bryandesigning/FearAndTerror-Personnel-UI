@@ -119,7 +119,10 @@ export class ApiService {
   }
 
   public getSteamData(steamId) {
-    // tslint:disable-next-line: max-line-length
     return this.httpClient.get(`${environment.apiUrl}/v1.0/steam/getUsers`, { params: { steamIds: steamId }});
+  }
+
+  public getSteamBanData(steamId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/steam/getUserBans`, { params: { steamIds: steamId }});
   }
 }

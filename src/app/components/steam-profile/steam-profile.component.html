@@ -4,6 +4,7 @@
     <div class="name">
       {{ steamData?.personaname }}<br />
       <span>{{ steamData?.steamid }}</span>
+      <span>{{ steamBans?.VACBanned ? steamBans?.NumberOfVACBans + ' VAC Bans - ' + steamBans?.DaysSinceLastBan + ' days ago ' : '0 VAC Bans ' }} | {{ steamBans?.NumberOfGameBans }} Game Bans</span>
     </div>
   </div>
 </a>

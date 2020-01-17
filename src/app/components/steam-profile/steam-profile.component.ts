@@ -26,6 +26,15 @@ export class SteamProfileComponent implements OnInit, OnChanges {
     timecreated: number;
     personastateflags: number;
   };
+  steamBans: {
+    SteamId: string;
+    CommunityBanned: boolean;
+    VACBanned: boolean;
+    NumberOfVACBans: number;
+    DaysSinceLastBan: number;
+    NumberOfGameBans: number;
+    EconomyBan: string;
+  };
 
   constructor(private api: ApiService) { }
 
@@ -34,6 +43,7 @@ export class SteamProfileComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getSteamData();
+    this.getSteamBans();
   }
 
   getSteamData() {
@@ -41,6 +51,15 @@ export class SteamProfileComponent implements OnInit, OnChanges {
       this.api.getSteamData(this.steamId)
         .subscribe((steamUser: any) => {
           this.steamData = steamUser.players.find(p => p.steamid === this.steamId);
+        });
+    }
+  }
+
+  getSteamBans() {
+    if (this.steamId) {
+      this.api.getSteamBanData(this.steamId)
+        .subscribe((steamBans: any) => {
+          this.steamBans = steamBans.players.find(p => p.SteamId === this.steamId);
         });
     }
   }
