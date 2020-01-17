@@ -60,7 +60,6 @@ export class ApplicationViewComponent implements OnInit {
   updateApplicationStatus(event) {
     this.api.updateApplication(this.application.id, event.value)
       .subscribe(res => {
-        console.log(res);
         this.toaster.open({
           text: 'Updated Application',
           position: 'top-right',

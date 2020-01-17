@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'vex-user-form',
@@ -16,6 +17,7 @@ export class UserFormComponent implements OnInit, OnChanges {
   constructor(
     private api: ApiService,
     private fb: FormBuilder,
+    private toaster: Toaster,
   ) { }
 
   ngOnInit() {
@@ -23,7 +25,6 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes): void {
     if (changes.user.currentValue) {
-      console.log(changes.user.currentValue);
       this.form = this.fb.group({
         steamId: [ changes.user.currentValue.steamId, [
           Validators.minLength(17),
@@ -40,7 +41,13 @@ export class UserFormComponent implements OnInit, OnChanges {
     }
     this.api.updateUser(this.user.id, this.form.value)
       .subscribe(res => {
-        console.log(res);
+        this.user.steamId = this.form.value.steamId;
+        this.toaster.open({
+          text: 'Updated SteamId',
+          position: 'top-right',
+          type: 'success',
+          duration: 2500,
+        });
       });
   }
 

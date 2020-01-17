@@ -117,4 +117,9 @@ export class ApiService {
   public updateApplication(appId, status) {
     return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}`, { status });
   }
+
+  public getSteamData(steamId) {
+    // tslint:disable-next-line: max-line-length
+    return this.httpClient.get(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=06BA68891EC7424A7BF3B1ED6D2EB61C&steamids=${steamId}`);
+  }
 }

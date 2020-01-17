@@ -82,11 +82,10 @@ export class UserPageComponent implements OnInit {
           this.user = user;
           this.user.roles = JSON.parse(this.user.roles);
 
-          console.log(this.user);
-
           this.getActivity();
           this.getAverageVoiceTime();
           this.getDailyMessages();
+          this.getSteamData();
         });
     });
   }
@@ -132,6 +131,15 @@ export class UserPageComponent implements OnInit {
           ...this.voicePerDay,
         ];
       });
+  }
+
+  getSteamData() {
+    if (this.user.steamId) {
+      this.api.getSteamData(this.user.steamId)
+        .subscribe(steamUser => {
+          console.log(steamUser);
+        });
+    }
   }
 
   parseTime(value) {
