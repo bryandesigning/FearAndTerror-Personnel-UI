@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { User, AuthenticationService } from 'src/app/services/authentication.service';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthenticationService, User } from 'src/app/services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
-  selector: 'vex-application-view',
-  templateUrl: './application-view.component.html',
-  styleUrls: ['./application-view.component.scss']
+  selector: 'vex-application-interview',
+  templateUrl: './application-interview.component.html',
+  styleUrls: ['./application-interview.component.scss']
 })
-export class ApplicationViewComponent implements OnInit {
+export class ApplicationInterviewComponent implements OnInit {
   appId: string;
   application: any;
   currentUser: User;
 
   statuses: string[] = [ 'voting', 'vote-review', 'pending-interview', 'paused', 'accepted', 'denied' ];
+  user: User;
 
   constructor(
     private api: ApiService,
@@ -38,30 +39,19 @@ export class ApplicationViewComponent implements OnInit {
           }
 
           this.application = res;
+
+          this.api.getUser(this.application.userId)
+            .subscribe((user: any) => {
+              this.user = user;
+            });
         });
     });
-  }
-
-  vote(upvote) {
-    return; // Disabled for now
-    if (this.application.status === 'voting') {
-      this.api.voteApplication(this.appId, upvote)
-        .subscribe(res => {
-          this.application = { ...res };
-          this.toaster.open({
-            text: 'Updated vote',
-            position: 'top-right',
-            type: 'success',
-            duration: 2500,
-          });
-        });
-    }
   }
 
   updateApplicationStatus(event) {
     this.api.updateApplication(this.application.id, event.value)
       .subscribe(res => {
-        this.application.status = event.value;
+        console.log(res);
         this.toaster.open({
           text: 'Updated Application',
           position: 'top-right',

@@ -3,9 +3,32 @@
     <mat-label>SteamID (64bit)</mat-label>
     <input formControlName="steamId" matInput type="text">
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>Military</mat-label>
+    <mat-select formControlName="military" class="selection" [value]="form?.military?.value">
+      <mat-option value="No" class="selection-option">No</mat-option>
+      <mat-option value="Active" class="selection-option">Active</mat-option>
+      <mat-option value="Reserve" class="selection-option">Reserve</mat-option>
+      <mat-option value="Veteran" class="selection-option">Veteran</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Timezone</mat-label>
+    <mat-select formControlName="tz" class="selection" [value]="form?.tz?.value">
+      <ng-container *ngFor="let group of timezones">
+        <mat-option *ngFor="let tz of group.zones" [value]="tz.value" class="selection-option">{{ tz.name }}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Join Date</mat-label>
+    <input matInput formControlName="joindate" [matDatepicker]="picker" placeholder="Member Join Date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
   <div>
-    <button color="primary" mat-raised-button type="submit" [disabled]="form?.invalid || form?.value?.steamId === user?.steamId">
-      Save Changes
+    <button color="primary" mat-raised-button type="submit" [disabled]="form?.invalid || !form?.dirty">
+      {{ interview ? 'Complete Interview' : 'Save Changes' }}
     </button>
   </div>
 </form>

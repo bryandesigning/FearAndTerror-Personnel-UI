@@ -8,6 +8,7 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { ApplicationComponent } from './pages/application/application.component';
 import { ApplicationsComponent } from './pages/applications/applications.component';
 import { ApplicationViewComponent } from './pages/application-view/application-view.component';
+import { ApplicationInterviewComponent } from './pages/application-interview/application-interview.component';
 
 const childrenRoutes: VexRoutes = [
   {
@@ -36,7 +37,16 @@ const childrenRoutes: VexRoutes = [
     children: [
       {
         path: ':appId',
-        component: ApplicationViewComponent,
+        children: [
+          {
+            path: 'interview',
+            component: ApplicationInterviewComponent,
+          },
+          {
+            path: '',
+            component: ApplicationViewComponent,
+          }
+        ]
       },
       {
         path: '',
