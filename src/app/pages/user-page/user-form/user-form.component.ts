@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { Toaster } from 'ngx-toast-notifications';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'vex-user-form',
@@ -12,7 +13,9 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   @Input() user: any;
   @Input() interview = false;
-  form: FormGroup;
+  @Input() application: any;
+
+  form: any;
   submitted = false;
   // tslint:disable-next-line: no-use-before-declare
   timezones = timezones;
@@ -22,6 +25,7 @@ export class UserFormComponent implements OnInit, OnChanges {
     private api: ApiService,
     private fb: FormBuilder,
     private toaster: Toaster,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -46,6 +50,22 @@ export class UserFormComponent implements OnInit, OnChanges {
     if (this.form.invalid) {
       return;
     }
+
+    if (this.interview) {
+      this.api.completeApplication(this.application.id, {
+        uid: this.user.id,
+        userId: this.user.userId,
+        status: 'accepted',
+        ...this.form.value,
+      }).subscribe(res => {
+        console.log(res);
+      });
+
+      this.router.navigate([ '/applications' ]);
+
+      return;
+    }
+
     this.api.updateUser(this.user.id, this.form.value)
       .subscribe(res => {
         this.user.steamId = this.form.value.steamId;

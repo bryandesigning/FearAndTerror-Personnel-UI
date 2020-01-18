@@ -16,6 +16,8 @@ export class ApplicationInterviewComponent implements OnInit {
 
   statuses: string[] = [ 'voting', 'vote-review', 'pending-interview', 'paused', 'accepted', 'denied' ];
   user: User;
+  disablePing = false;
+  promoted = false;
 
   constructor(
     private api: ApiService,
@@ -49,9 +51,8 @@ export class ApplicationInterviewComponent implements OnInit {
   }
 
   updateApplicationStatus(event) {
-    this.api.updateApplication(this.application.id, event.value)
+    this.api.updateApplication(this.application.id, event.value, this.application.userId)
       .subscribe(res => {
-        console.log(res);
         this.toaster.open({
           text: 'Updated Application',
           position: 'top-right',
@@ -59,6 +60,41 @@ export class ApplicationInterviewComponent implements OnInit {
           duration: 2500,
         });
       });
+  }
+
+  rolePing() {
+    if (this.disablePing) {
+      return;
+    }
+
+    this.disablePing = true;
+    this.api.pingTagChannel(this.application.userId)
+      .subscribe(res => {
+        this.toaster.open({
+          text: 'Pinged applicant in #channel-signups',
+          position: 'top-right',
+          type: 'success',
+          duration: 2500,
+        });
+      });
+  }
+
+  promoteApplicant() {
+    if (this.promoted) {
+      return;
+    }
+
+    this.promoted = true;
+    this.api.promoteApplicant(this.application.userId)
+      .subscribe(res => {
+        console.log(res);
+        this.toaster.open({
+          text: 'Promoted applicant to recruit',
+          position: 'top-right',
+          type: 'success',
+          duration: 2500,
+        });
+      })
   }
 
 }

@@ -26,6 +26,11 @@ export class ApplicationComponent implements OnInit {
       .subscribe(params => {
         this.uuid = params.uuid;
 
+        if (!this.uuid) {
+          window.location.href = 'http://api.fearandterror.com/v1.0/discord/redirect';
+          return;
+        }
+
         this.api.getApplicationSession(params.uuid)
           .subscribe(res => {
             this.session = res;
@@ -49,7 +54,10 @@ export class ApplicationComponent implements OnInit {
   submit() {
     if (!this.form.invalid) {
       this.submitted = true;
-      this.api.submitApplication(this.form.value);
+      this.api.submitApplication(this.form.value)
+        .subscribe(res => {
+          console.log(res);
+        });
     }
   }
 

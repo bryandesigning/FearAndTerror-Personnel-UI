@@ -114,8 +114,8 @@ export class ApiService {
     return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}/vote`, { upvote });
   }
 
-  public updateApplication(appId, status) {
-    return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}`, { status });
+  public updateApplication(appId, status, uid) {
+    return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}`, { status, uid });
   }
 
   public getSteamData(steamId) {
@@ -124,5 +124,17 @@ export class ApiService {
 
   public getSteamBanData(steamId) {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/steam/getUserBans`, { params: { steamIds: steamId }});
+  }
+
+  public pingTagChannel(uid) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications/giveTags`, { params: { uid }});
+  }
+
+  public completeApplication(appId, body) {
+    return this.httpClient.post(`${environment.apiUrl}/v1.0/applications/${appId}/complete`, { ...body });
+  }
+
+  public promoteApplicant(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/application/promote`, { params: { userId }});
   }
 }

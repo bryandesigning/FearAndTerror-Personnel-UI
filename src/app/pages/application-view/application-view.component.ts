@@ -43,7 +43,6 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   vote(upvote) {
-    return; // Disabled for now
     if (this.application.status === 'voting') {
       this.api.voteApplication(this.appId, upvote)
         .subscribe(res => {
@@ -59,7 +58,7 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   updateApplicationStatus(event) {
-    this.api.updateApplication(this.application.id, event.value)
+    this.api.updateApplication(this.application.id, event.value, this.application.userId)
       .subscribe(res => {
         this.application.status = event.value;
         this.toaster.open({

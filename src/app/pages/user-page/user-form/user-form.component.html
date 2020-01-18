@@ -27,7 +27,7 @@
     <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
   </mat-form-field>
   <div>
-    <button color="primary" mat-raised-button type="submit" [disabled]="form?.invalid || !form?.dirty">
+    <button color="primary" mat-raised-button type="submit" [disabled]="!interview && (form?.invalid || !form?.dirty)">
       {{ interview ? 'Complete Interview' : 'Save Changes' }}
     </button>
   </div>

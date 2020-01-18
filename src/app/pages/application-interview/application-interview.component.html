@@ -9,6 +9,7 @@
     <h1>@{{ application?.username }} <span class="discord-id">{{ application?.userId }}</span></h1>
     <h3>{{ application?.age }} Years Old</h3>
   </div>
+
   <div gdColumn="span 1" fxLayout="row" fxLayoutAlign="end center">
     <mat-chip class="profile" [routerLink]="['/user', application?.userId ]">Profile</mat-chip>
     <mat-chip class="upvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] }">{{ application?.upvotes }}</mat-chip>
@@ -19,6 +20,9 @@
       </mat-option>
     </mat-select>
   </div>
+  
+  <button color="primary" mat-raised-button (click)="promoteApplicant()" [disabled]="promoted">Promote to Recruit</button>
+  <button color="primary" mat-raised-button (click)="rolePing()" [disabled]="disablePing">Ping for Channel Signup</button>
 
-  <vex-user-form [user]="user" gdColumn="1 / -1" [interview]="true"></vex-user-form>
+  <vex-user-form [user]="user" [application]="application" gdColumn="1 / -1" [interview]="true"></vex-user-form>
 </div>
