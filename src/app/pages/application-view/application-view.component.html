@@ -10,8 +10,12 @@
     <h3>{{ application?.age }} Years Old</h3>
   </div>
   <div gdColumn="span 1" fxLayout="row" fxLayoutAlign="end center">
-    <mat-chip class="profile" [routerLink]="application?.status === 'pending-interview' ? ['/applications', application?.id, 'interview' ] : null" [disabled]="application?.status !== 'pending-interview'">Interview</mat-chip>
-    <mat-chip class="profile" [routerLink]="['/user', application?.userId ]">Profile</mat-chip>
+    <a [routerLink]="application?.status === 'pending-interview' ? ['/applications', application?.id, 'interview' ] : null">
+      <mat-chip class="profile" [disabled]="application?.status !== 'pending-interview'">Interview</mat-chip>
+    </a>
+    <a [routerLink]="['/user', application?.userId ]">
+      <mat-chip class="profile" >Profile</mat-chip>
+    </a>
     <mat-chip class="upvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] }" (click)="vote(true)">{{ application?.upvotes }}</mat-chip>
     <mat-chip class="downvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] == false }" (click)="vote(false)">{{ application?.downvotes }}</mat-chip>
     <mat-select class="selection" [value]="application?.status" (selectionChange)="updateApplicationStatus($event)">

@@ -26,9 +26,9 @@ export class ApplicationsComponent implements OnInit {
     this.getApplications();
   }
 
-  getApplications() {
+  getApplications(page = 0) {
     this.pendingLoad = true;
-    this.api.getApplications(this.currentStatus)
+    this.api.getApplications(this.currentStatus, page)
       .subscribe((res: any) => {
         if (res.count >= 0) {
           this.pendingLoad = false;
@@ -50,7 +50,7 @@ export class ApplicationsComponent implements OnInit {
   pageChange(event) {
     if (!this.pendingLoad) {
       this.pendingLoad = true;
-      // this.search.findUserPaginate(this.limit, event.pageIndex);
+      this.getApplications(event.pageIndex + 1);
     }
   }
 

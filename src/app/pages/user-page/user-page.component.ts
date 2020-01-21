@@ -141,9 +141,9 @@ export class UserPageComponent implements OnInit {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
-  getApplications() {
+  getApplications(page = 0) {
     this.pendingLoad = true;
-    this.api.getUserApplications(this.userId)
+    this.api.getUserApplications(this.userId, page)
       .subscribe((res: any) => {
         if (res.count >= 0) {
           this.pendingLoad = false;
@@ -160,7 +160,7 @@ export class UserPageComponent implements OnInit {
   pageChange(event) {
     if (!this.pendingLoad) {
       this.pendingLoad = true;
-      // this.search.findUserPaginate(this.limit, event.pageIndex);
+      this.getApplications(event.pageIndex + 1);
     }
   }
 

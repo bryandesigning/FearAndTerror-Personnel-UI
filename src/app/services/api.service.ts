@@ -91,15 +91,14 @@ export class ApiService {
 
   public getApplicationSession(uuid) {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/discord/session`, { params: { uuid }});
-    // return this.httpClient.get(`http://api.personnel.squadhosting.com/v1.0/discord/session`, { params: { uuid }});
   }
 
-  public getApplications(status = 'voting') {
-    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications`, { params: { status }});
+  public getApplications(status = 'voting', page = 0, orderBy = 'createdAt', direction = 'DESC') {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications`, { params: { status, page, orderBy, direction } as any});
   }
 
-  public getUserApplications(userId) {
-    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications/${userId}`);
+  public getUserApplications(userId, page = 0) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/applications/${userId}`, { params: { page } as any });
   }
 
   public submitApplication(data) {

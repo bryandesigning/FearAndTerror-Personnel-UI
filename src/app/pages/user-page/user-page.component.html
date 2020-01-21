@@ -117,7 +117,9 @@ vexContainer
             <ng-container matColumnDef="expand">
               <th mat-header-cell *matHeaderCellDef> View </th>
               <td mat-cell *matCellDef="let element">
-                <button color="primary" mat-button type="button" [routerLink]="['/applications', element?.id ]">View Application</button>
+                <a [routerLink]="['/applications', element?.id ]">
+                  <button color="primary" mat-button type="button">View Application</button>
+                </a>
               </td>
             </ng-container>
         
