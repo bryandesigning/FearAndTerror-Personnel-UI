@@ -73,6 +73,62 @@ export class DashboardAnalyticsComponent implements OnInit {
   messageIncreasePercentage = 0;
   channels: any;
 
+  voicePerDayOptions = defaultChartOptions({
+    chart: {
+      type: 'line',
+      height: 250,
+      zoom: {
+        type: 'x',
+        enabled: true,
+        autoScaleYaxis: true
+      },
+      toolbar: {
+        show: true,
+        autoSelected: 'zoom'
+      }
+    },
+    tooltip: {
+      x: {
+        show: true,
+        format: 'hh:mm TT - MMM dd yyyy'
+      }
+    },
+    title: {
+      text: 'Division voice users by hour',
+      align: 'left',
+      style: {
+        fontSize: '12px',
+        fontFamily: 'Roboto',
+        color: 'rgba(255, 255, 255, 0.7)',
+      }
+    },
+    xaxis: {
+      type: 'datetime'
+    },
+    colors: [ theme.colors.orange['500'], theme.colors.green['500'], theme.colors.teal['500'] ],
+  });
+
+  voicePerDay: ApexAxisChartSeries = [];
+
+  divisions = [
+    {
+      name: 'Escape From Tarkov',
+      search: 'eft',
+    },
+    {
+      name: 'Rainbow 6 Siege',
+      search: 'r6s',
+    },
+    {
+      name: 'Squad',
+      search: 'sq',
+    },
+    {
+      name: 'Halo',
+      search: 'halo',
+    },
+  ];
+
   constructor(
     private cd: ChangeDetectorRef,
     private apiService: ApiService,
@@ -171,6 +227,33 @@ export class DashboardAnalyticsComponent implements OnInit {
       .subscribe((result: any) => {
         this.channels = result;
       });
+
+    this.divisions.forEach(div => {
+      this.apiService.getVoiceActivityByDivision(div.search, 14)
+        .subscribe((data: any) => {
+          this.voicePerDay.push({
+            name: div.name,
+            data: Object.keys(data).map(key => {
+              return {
+                x: key,
+                y: data[key].users,
+              };
+            }),
+          });
+
+          this.voicePerDay = [ ...this.voicePerDay ];
+        });
+    });
+  }
+
+  parseTime(value) {
+    const inputSeconds = parseInt(value, 0);
+    const days = Math.floor(inputSeconds / (3600 * 24));
+    const hours = Math.floor(inputSeconds / 3600) - (days * 24);
+    const minutes = Math.floor((inputSeconds - (days * 24 * 3600) - (hours * 3600)) / 60);
+    const seconds = inputSeconds - (days * 24 * 3600) - (hours * 3600) - (minutes * 60);
+    // tslint:disable-next-line: max-line-length
+    return `${days} days ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
 }

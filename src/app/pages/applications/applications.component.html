@@ -8,7 +8,7 @@
 </div>
 
 <div
-  class="p-gutter"
+  class="p-gutter overflow-y"
   gdColumns="1fr"
   vexContainer
 >
@@ -41,7 +41,7 @@
     <ng-container matColumnDef="upvotes">
       <th mat-header-cell *matHeaderCellDef> Upvotes </th>
       <td mat-cell *matCellDef="let element">
-        <mat-chip class="upvote">{{ element?.upvotes | number }}</mat-chip>
+        <mat-chip class="upvote" [ngClass]="{ 'active': element?.votes[currentUser?.userId] }">{{ element?.upvotes }}</mat-chip>
       </td>
     </ng-container>
 
@@ -49,14 +49,14 @@
     <ng-container matColumnDef="downvotes">
       <th mat-header-cell *matHeaderCellDef> Downvotes </th>
       <td mat-cell *matCellDef="let element">
-        <mat-chip class="downvote">{{ element?.downvotes }}</mat-chip>
+        <mat-chip class="downvote" [ngClass]="{ 'active': element?.votes[currentUser?.userId] == false }">{{ element?.downvotes }}</mat-chip>    
       </td>
     </ng-container>
 
     <!-- Profile Column -->
     <ng-container matColumnDef="created">
       <th mat-header-cell *matHeaderCellDef> Submitted </th>
-      <td mat-cell *matCellDef="let element"> {{ element?.createdAt | date:'short' }} </td>
+      <td mat-cell *matCellDef="let element"><span [matTooltip]="element?.createdAt | date:'short'"> {{ element?.createdAt | timeago }} </span></td>
     </ng-container>
 
     <!-- Profile Column -->

@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { startWith, map, tap, debounceTime, switchMap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'vex-user-form',
@@ -20,6 +22,7 @@ export class UserFormComponent implements OnInit, OnChanges {
   // tslint:disable-next-line: no-use-before-declare
   timezones = timezones;
   startDate = new Date(2019, 0, 1);
+  filteredUsers: any;
 
   constructor(
     private api: ApiService,
@@ -29,6 +32,10 @@ export class UserFormComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
+  }
+
+  findUsers(needle) {
+    return this.api.searchUser({ search: needle });
   }
 
   ngOnChanges(changes): void {
@@ -42,7 +49,20 @@ export class UserFormComponent implements OnInit, OnChanges {
         military: [ !changes.user.currentValue.military ? 'No' : changes.user.currentValue.military ],
         tz: [ changes.user.currentValue.tz ],
         joindate: [ changes.user.currentValue.joindate ? changes.user.currentValue.joindate : this.interview ? new Date() : null ],
+        ambassador: [ changes.user.currentValue.ambassador || '' ],
       });
+
+      this.form.get('ambassador')
+        .valueChanges
+        .pipe(
+          debounceTime(300),
+          switchMap(value => this.api.searchUser({ search: value }))
+        )
+        .subscribe(users => {
+          console.log(users.rows);
+          this.filteredUsers = users.rows;
+        });
+
     }
   }
 
@@ -70,9 +90,16 @@ export class UserFormComponent implements OnInit, OnChanges {
       .subscribe(res => {
         this.user.steamId = this.form.value.steamId;
         this.toaster.open({
-          text: 'Updated SteamId',
+          text: 'Saved user settings',
           position: 'top-right',
           type: 'success',
+          duration: 2500,
+        });
+      }, text => {
+        this.toaster.open({
+          text,
+          position: 'top-right',
+          type: 'danger',
           duration: 2500,
         });
       });

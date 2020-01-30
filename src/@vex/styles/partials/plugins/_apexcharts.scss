@@ -5,4 +5,12 @@
 
 body .apexcharts-tooltip.light {
   background: var(--background-card);
+
+  .apexcharts-tooltip-title {
+    background: transparent;
+  }
+}
+
+.apexcharts-tooltip-title {
+
 }

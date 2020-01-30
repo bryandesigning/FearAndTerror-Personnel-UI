@@ -39,7 +39,7 @@ export class UserSearchComponent implements OnInit {
   pageChange(event) {
     if (!this.pendingLoad) {
       this.pendingLoad = true;
-      this.search.findUserPaginate(this.limit, event.pageIndex);
+      this.search.findUserPaginate(this.limit, event.pageIndex + 1);
     }
   }
 

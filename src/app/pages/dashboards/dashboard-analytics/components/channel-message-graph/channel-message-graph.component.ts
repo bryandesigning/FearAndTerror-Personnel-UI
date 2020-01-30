@@ -84,6 +84,8 @@ export class ChannelMessageGraphComponent implements OnInit {
     if (this.loadedChannels.length !== 5) {
       this.loadChartData(value.channelId, value.name);
     }
+
+    console.log(this.series);
   }
 
   removeChannel(channel) {

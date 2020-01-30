@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthenticationService, User } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'vex-applications',
@@ -17,13 +18,19 @@ export class ApplicationsComponent implements OnInit {
   limit = 20;
   offset = 0;
   pendingLoad = true;
+  currentUser: User;
 
   constructor(
     private api: ApiService,
+    private authService: AuthenticationService,
   ) { }
 
   ngOnInit() {
     this.getApplications();
+
+    this.authService.currentUser.subscribe(cu => {
+      this.currentUser = cu;
+    });
   }
 
   getApplications(page = 0) {

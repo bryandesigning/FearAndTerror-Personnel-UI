@@ -23,6 +23,8 @@ import {
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatAutocomplete,
+  MatAutocompleteModule,
 } from '@angular/material';
 import { ContainerModule } from 'src/@vex/directives/container/container.module';
 import { UserPageComponent } from './pages/user-page/user-page.component';
@@ -41,6 +43,8 @@ import { UserFormComponent } from './pages/user-page/user-form/user-form.compone
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { ApplicationInterviewComponent } from './pages/application-interview/application-interview.component';
 import { SteamProfileComponent } from './components/steam-profile/steam-profile.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -81,7 +85,9 @@ import { SteamProfileComponent } from './components/steam-profile/steam-profile.
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatAutocompleteModule,
     TimeagoModule.forRoot(),
+    MatTooltipModule,
 
     // Vex
     VexModule,
