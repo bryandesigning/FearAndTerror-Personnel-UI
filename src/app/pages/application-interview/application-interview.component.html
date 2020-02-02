@@ -15,7 +15,7 @@
     <mat-chip class="upvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] }">{{ application?.upvotes }}</mat-chip>
     <mat-chip class="downvote" [ngClass]="{ 'active': application?.votes[currentUser?.userId] == false }">{{ application?.downvotes }}</mat-chip>
     <mat-select class="selection" [value]="application?.status" (selectionChange)="updateApplicationStatus($event)" disabled="true">
-      <mat-option *ngFor="let status of statuses" [value]="status" class="selection-option">
+      <mat-option *ngFor="let status of statusArray" [value]="status" class="selection-option">
         {{ status }}
       </mat-option>
     </mat-select>

@@ -15,6 +15,7 @@ export class ApplicationViewComponent implements OnInit {
   currentUser: User;
 
   statuses: string[] = [ 'voting', 'vote-review', 'pending-introduction', 'paused', 'accepted', 'denied' ];
+  statusArray: string[];
 
   constructor(
     private api: ApiService,
@@ -38,8 +39,34 @@ export class ApplicationViewComponent implements OnInit {
           }
 
           this.application = res;
+          this.buildStatusArray();
         });
     });
+  }
+
+  buildStatusArray() {
+    switch (this.application.status) {
+      case 'voting':
+        this.statusArray = [ 'voting', 'vote-review', 'paused' ];
+        break;
+      case 'vote-review':
+        this.statusArray = [ 'vote-review', 'pending-introduction', 'denied', 'paused' ];
+        break;
+      case 'pending-introduction':
+        this.statusArray = [ 'pending-introduction' ];
+        break;
+      case 'accepted':
+        this.statusArray = [ 'accepted' ];
+        break;
+      case 'denied':
+        this.statusArray = [ 'denied' ];
+        break;
+      case 'paused':
+        this.statusArray = [ 'paused', 'voting', 'vote-review', 'pending-introduction' ];
+        break;
+      default:
+        break;
+    }
   }
 
   vote(upvote) {
@@ -61,6 +88,7 @@ export class ApplicationViewComponent implements OnInit {
     this.api.updateApplication(this.application.id, event.value, this.application.userId)
       .subscribe(res => {
         this.application.status = event.value;
+        this.buildStatusArray();
         this.toaster.open({
           text: 'Updated Application',
           position: 'top-right',

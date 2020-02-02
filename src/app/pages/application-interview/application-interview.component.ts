@@ -15,6 +15,7 @@ export class ApplicationInterviewComponent implements OnInit {
   currentUser: User;
 
   statuses: string[] = [ 'voting', 'vote-review', 'pending-introduction', 'paused', 'accepted', 'denied' ];
+  statusArray: string[] = [];
   user: User;
   disablePing = false;
   promoted = false;
@@ -42,12 +43,39 @@ export class ApplicationInterviewComponent implements OnInit {
 
           this.application = res;
 
+          this.buildStatusArray();
+
           this.api.getUser(this.application.userId)
             .subscribe((user: any) => {
               this.user = user;
             });
         });
     });
+  }
+
+  buildStatusArray() {
+    switch (this.application.status) {
+      case 'voting':
+        this.statusArray = [ 'voting', 'pending-introduction', 'paused' ];
+        break;
+      case 'vote-review':
+        this.statusArray = [ 'vote-review', 'pending-introduction', 'denied', 'paused' ];
+        break;
+      case 'pending-introduction':
+        this.statusArray = [ 'pending-introduction' ];
+        break;
+      case 'accepted':
+        this.statusArray = [ 'accepted' ];
+        break;
+      case 'denied':
+        this.statusArray = [ 'denied' ];
+        break;
+      case 'paused':
+        this.statusArray = [ 'paused', 'voting', 'vote-review', 'pending-introduction' ];
+        break;
+      default:
+        break;
+    }
   }
 
   updateApplicationStatus(event) {
