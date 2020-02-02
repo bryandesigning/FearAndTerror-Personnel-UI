@@ -9,8 +9,8 @@ import { AuthenticationService, User } from 'src/app/services/authentication.ser
 })
 export class ApplicationsComponent implements OnInit {
 
-  statuses: string[] = [ 'voting', 'vote-review', 'pending-interview', 'paused', 'accepted', 'denied' ];
-  currentStatus = 'voting';
+  statuses: string[] = [ 'voting', 'vote-review', 'pending-introduction', 'paused', 'accepted', 'denied' ];
+  currentStatus: string;
 
   displayedColumns: string[] = [ 'status', 'username', 'age', 'upvotes', 'downvotes', 'created', 'updated', 'expand' ];
   applications: any[];
@@ -34,6 +34,11 @@ export class ApplicationsComponent implements OnInit {
   }
 
   getApplications(page = 0) {
+    // Load currentStatus from localstorage if we don't already have it
+    if (!this.currentStatus) {
+      this.currentStatus = localStorage.getItem('currentStatus') || 'voting';
+    }
+
     this.pendingLoad = true;
     this.api.getApplications(this.currentStatus, page)
       .subscribe((res: any) => {
@@ -49,8 +54,9 @@ export class ApplicationsComponent implements OnInit {
       });
   }
 
-  handleChange(event) {
-    this.currentStatus = event.value;
+  handleChange(status) {
+    this.currentStatus = status;
+    localStorage.setItem('currentStatus', this.currentStatus);
     this.getApplications();
   }
 

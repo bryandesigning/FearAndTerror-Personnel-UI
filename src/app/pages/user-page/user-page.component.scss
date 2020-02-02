@@ -45,3 +45,34 @@
         margin: 0 20px 20px 0;
     }
 }
+
+.history-event {
+    width: calc(100% - 20px);
+    margin: 15px 10px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 10px;
+
+    .mat-chip {
+        padding: 5px 10px;
+        border-radius: 25px;
+        text-transform: capitalize;
+
+        &.action {
+            background: #5c77ff;
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: 300;
+            margin: 0 25px 0 0;
+        }
+
+        &.time {
+            float: right;
+        }
+    }
+
+    a {
+        text-decoration: underline;
+        font-weight: bold;
+    }
+}

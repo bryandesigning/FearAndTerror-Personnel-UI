@@ -49,7 +49,57 @@ vexContainer
         ></vex-widget-quick-line-chart>
       </mat-tab>
       <mat-tab label="User History">
-        <h1>User History Here</h1>
+        <ng-container *ngFor="let event of userHistory">
+          <div class="history-event">
+            <!-- Ignore all events that are the discord tag bot -->
+            <mat-chip class="action">{{ event?.action }}</mat-chip>
+            <mat-chip class="time" [matTooltip]="event?.createdAt | date:'short'" matTooltipPosition="right"> {{ event?.createdAt | timeago }}</mat-chip>
+
+            <ng-container *ngIf="event?.action === 'submitted-application'">
+              {{ user?.nickname || user?.username }} submitted a new <a [routerLink]="['/applications', event?.details?.id ]">application</a> to Fear and Terror.
+            </ng-container>
+
+            <ng-container *ngIf="event?.action === 'updated-application'">
+              <ng-container *ngIf="event?.caller !== 'pam'">
+                <a [routerLink]="['/user', event?.caller ]">{{ event?.callerName || event?.caller }}</a> updated {{ user?.nickname || user?.username }}'s <a [routerLink]="['/applications', event?.details?.id ]">application</a> to {{ event?.details?.status }}.
+              </ng-container>
+              <ng-container *ngIf="event?.caller === 'pam'">
+                PAM updated {{ user?.nickname || user?.username }}'s <a [routerLink]="['/applications', event?.details?.id ]">application</a> to {{ event?.details?.status }}.
+              </ng-container>
+            </ng-container>
+            
+
+            <ng-container *ngIf="event?.action === 'update-user'">
+              <a [routerLink]="['/user', event?.caller ]">{{ event?.callerName }}</a> updated {{ user?.nickname || user?.username }}'s account in PAM.
+              <br /><br />
+              <strong>Changes:</strong>
+              <br />
+              <ul>
+                <li *ngFor="let key of objectKeys(event?.details)">
+                  <strong>{{ key }}</strong> changed from <strong>{{ event?.details[key].old ? event?.details[key].old : 'null' }}</strong> to <strong>{{ event?.details[key].new }}</strong>
+                </li>
+              </ul>
+            </ng-container>
+
+            <ng-container *ngIf="event?.action === 'add-role'">
+              <ng-container *ngIf="event?.caller !== '578645276189786122'">
+                <a [routerLink]="['/user', event?.caller ]">{{ event?.callerName }}</a> added <mat-chip>{{ event?.details[0]?.name }}</mat-chip> to {{ user?.nickname || user?.username }}.
+              </ng-container>
+              <ng-container *ngIf="event?.caller === '578645276189786122'">
+                A Bot added <mat-chip>{{ event?.details[0]?.name }}</mat-chip> to {{ user?.nickname || user?.username }}.
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="event?.action === 'remove-role'">
+              <ng-container *ngIf="event?.caller !== '578645276189786122'">
+                <a [routerLink]="['/user', event?.caller ]">{{ event?.callerName }}</a> removed <mat-chip>{{ event?.details[0]?.name }}</mat-chip> from {{ user?.nickname || user?.username }}.
+              </ng-container>
+              <ng-container *ngIf="event?.caller === '578645276189786122'">
+                A Bot removed <mat-chip>{{ event?.details[0]?.name }}</mat-chip> from {{ user?.nickname || user?.username }}.
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
       </mat-tab>
       <mat-tab label="Staff Notes">
         <h1>User Notes here</h1>

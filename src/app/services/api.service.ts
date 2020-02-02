@@ -138,6 +138,10 @@ export class ApiService {
   }
 
   public getVoiceActivityByDivision(search, days = 7) {
-    return this.httpClient.get(`${environment.apiUrl}/v1.0/voice/${search}?days=${days}`, { params: { days } as any});
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/voice/${search}`, { params: { days } as any});
+  }
+
+  public getUserEventLog(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/eventlog/${userId}`);
   }
 }

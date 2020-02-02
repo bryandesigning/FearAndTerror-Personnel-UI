@@ -14,7 +14,7 @@ export class ApplicationViewComponent implements OnInit {
   application: any;
   currentUser: User;
 
-  statuses: string[] = [ 'voting', 'vote-review', 'pending-interview', 'paused', 'accepted', 'denied' ];
+  statuses: string[] = [ 'voting', 'vote-review', 'pending-introduction', 'paused', 'accepted', 'denied' ];
 
   constructor(
     private api: ApiService,

@@ -91,7 +91,7 @@ export class DashboardAnalyticsComponent implements OnInit {
       x: {
         show: true,
         format: 'hh:mm TT - MMM dd yyyy'
-      }
+      },
     },
     title: {
       text: 'Division voice users by hour',
@@ -105,10 +105,10 @@ export class DashboardAnalyticsComponent implements OnInit {
     xaxis: {
       type: 'datetime'
     },
-    colors: [ theme.colors.orange['500'], theme.colors.green['500'], theme.colors.teal['500'] ],
+    colors: [ '#f03434', '#22a7f0', '#f7ca18', '#00b16a' ],
   });
 
-  voicePerDay: ApexAxisChartSeries = [];
+  voicePerDay = [];
 
   divisions = [
     {
@@ -228,10 +228,15 @@ export class DashboardAnalyticsComponent implements OnInit {
         this.channels = result;
       });
 
-    this.divisions.forEach(div => {
+    this.divisions.forEach((div, index) => {
+      this.voicePerDay[index] = {
+        name: div.name,
+        data: [],
+      };
+
       this.apiService.getVoiceActivityByDivision(div.search, 14)
         .subscribe((data: any) => {
-          this.voicePerDay.push({
+          this.voicePerDay[index] = {
             name: div.name,
             data: Object.keys(data).map(key => {
               return {
@@ -239,7 +244,7 @@ export class DashboardAnalyticsComponent implements OnInit {
                 y: data[key].users,
               };
             }),
-          });
+          };
 
           this.voicePerDay = [ ...this.voicePerDay ];
         });

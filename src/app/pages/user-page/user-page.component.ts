@@ -18,6 +18,7 @@ export class UserPageComponent implements OnInit {
   theme = theme;
   icGroup = icGroup;
   icComment = icComment;
+  objectKeys = Object.keys;
 
   voiceWeeklyAverage = '00:00:00';
   voicePerDayOptions = defaultChartOptions({
@@ -60,6 +61,7 @@ export class UserPageComponent implements OnInit {
   limit = 20;
   offset = 0;
   pendingLoad = true;
+  userHistory: any[];
 
   constructor(
     private api: ApiService,
@@ -75,9 +77,9 @@ export class UserPageComponent implements OnInit {
       });
 
     this.route.params.subscribe(params => {
-       this.userId = params.userId;
-       this.getApplications();
-       this.api.getUser(this.userId)
+      this.userId = params.userId;
+      this.getApplications();
+      this.api.getUser(this.userId)
         .subscribe(user => {
           this.user = user;
           this.user.roles = JSON.parse(this.user.roles);
@@ -85,6 +87,11 @@ export class UserPageComponent implements OnInit {
           this.getActivity();
           this.getAverageVoiceTime();
           this.getDailyMessages();
+        });
+
+      this.api.getUserEventLog(this.userId)
+        .subscribe((results: any) => {
+          this.userHistory = results;
         });
     });
   }

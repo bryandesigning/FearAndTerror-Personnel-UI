@@ -17,6 +17,13 @@
   </div>
 
   <div class="sidenav-items flex-auto" vexScrollbar>
+    <div class="search">
+      <mat-form-field appearance="outline" class="search" fxFlex="auto">
+        <mat-label>Search&hellip;</mat-label>
+        <input #input matInput (keyup.enter)="handleSearch()">
+      </mat-form-field>
+      <mat-icon [icIcon]="icSearch" (click)="handleSearch()"></mat-icon>
+    </div>
     <vex-sidenav-item *ngFor="let item of items; trackBy: trackByRoute"
                       [item]="item"
                       [level]="0"></vex-sidenav-item>

@@ -63,3 +63,17 @@
 .sidenav-items {
   padding-top: var(--padding);
 }
+
+
+
+.mat-icon {
+  cursor: pointer;
+  margin-top: 15px;
+  margin-left: -40px;
+  @apply text-primary-500;
+}
+
+.search {
+  width: 250px;
+  margin: 0 5px
+}

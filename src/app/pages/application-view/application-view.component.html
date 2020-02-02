@@ -11,8 +11,8 @@
     <h3>{{ application?.age }} Years Old</h3>
   </div>
   <div gdColumn="span 1" fxLayout="row" fxLayoutAlign="end center">
-    <a [routerLink]="application?.status === 'pending-interview' ? ['/applications', application?.id, 'interview' ] : null">
-      <mat-chip class="profile" [disabled]="application?.status !== 'pending-interview'">Interview</mat-chip>
+    <a [routerLink]="application?.status === 'pending-introduction' ? ['/applications', application?.id, 'interview' ] : null">
+      <mat-chip class="profile" [disabled]="application?.status !== 'pending-introduction'">Introduction</mat-chip>
     </a>
     <a [routerLink]="['/user', application?.userId ]">
       <mat-chip class="profile" >Profile</mat-chip>

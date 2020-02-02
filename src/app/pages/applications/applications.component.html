@@ -1,10 +1,10 @@
 
 <div class="p-gutter filter" vexContainer>
-  <mat-select [value]="currentStatus" (selectionChange)="handleChange($event)">
-    <mat-option *ngFor="let status of statuses" [value]="status">
-      {{ status }}
-    </mat-option>
-  </mat-select>
+  <mat-chip
+    *ngFor="let status of statuses"
+    [ngClass]="{ active: status === currentStatus }"
+    (click)="handleChange(status)"
+  >{{ status }}</mat-chip>
 </div>
 
 <div
@@ -14,10 +14,6 @@
 >
   <table mat-table [dataSource]="applications" class="application-table">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Name Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let element">
@@ -30,11 +26,9 @@
       <td mat-cell *matCellDef="let element"> {{ element?.username }} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="age">
       <th mat-header-cell *matHeaderCellDef> Age </th>
-      <td mat-cell *matCellDef="let element"> {{ element?.age | number }} </td>
-      <!-- [ngClass]="{ 'underage': (element?.age | number) < 18}" -->
+      <td mat-cell *matCellDef="let element" [ngClass]="{ 'underage': (element?.age | number) < 18}"> {{ element?.age | number }} </td>
     </ng-container>
 
     <!-- Symbol Column -->

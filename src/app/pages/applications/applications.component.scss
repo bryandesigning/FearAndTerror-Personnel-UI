@@ -4,6 +4,17 @@
         background: rgba(0,0,0,0.25);
         padding: 15px;
     }
+
+    .mat-chip {
+        padding: 5px 10px;
+        border-radius: 25px;
+        text-transform: capitalize;
+        margin: 0 10px;
+
+        &.active {
+            background: #5c77ff;
+        }
+    }
 }
 
 .overflow-y {
