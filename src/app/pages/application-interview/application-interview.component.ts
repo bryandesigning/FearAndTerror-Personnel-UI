@@ -56,7 +56,7 @@ export class ApplicationInterviewComponent implements OnInit {
   buildStatusArray() {
     switch (this.application.status) {
       case 'voting':
-        this.statusArray = [ 'voting', 'pending-introduction', 'paused' ];
+        this.statusArray = [ 'voting', 'vote-review', 'paused' ];
         break;
       case 'vote-review':
         this.statusArray = [ 'vote-review', 'pending-introduction', 'denied', 'paused' ];
@@ -71,7 +71,7 @@ export class ApplicationInterviewComponent implements OnInit {
         this.statusArray = [ 'denied' ];
         break;
       case 'paused':
-        this.statusArray = [ 'paused', 'voting', 'vote-review', 'pending-introduction' ];
+        this.statusArray = [ 'paused', 'voting', 'pending-introduction', 'denied' ];
         break;
       default:
         break;

@@ -62,7 +62,7 @@ export class ApplicationViewComponent implements OnInit {
         this.statusArray = [ 'denied' ];
         break;
       case 'paused':
-        this.statusArray = [ 'paused', 'voting', 'vote-review', 'pending-introduction' ];
+        this.statusArray = [ 'paused', 'voting', 'pending-introduction', 'denied' ];
         break;
       default:
         break;
