@@ -76,7 +76,7 @@ vexContainer
               <br />
               <ul>
                 <li *ngFor="let key of objectKeys(event?.details)">
-                  <strong>{{ key }}</strong> changed from <strong>{{ event?.details[key].old ? event?.details[key].old : 'null' }}</strong> to <strong>{{ event?.details[key].new }}</strong>
+                  <strong>{{ key }}</strong> changed from <strong>{{ event?.details[key]?.old ? event?.details[key]?.old : 'null' }}</strong> to <strong>{{ event?.details[key]?.new }}</strong>
                 </li>
               </ul>
             </ng-container>
