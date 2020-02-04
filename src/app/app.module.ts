@@ -44,6 +44,7 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { ApplicationInterviewComponent } from './pages/application-interview/application-interview.component';
 import { SteamProfileComponent } from './components/steam-profile/steam-profile.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AgePipe } from './pipes/age.pipe';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     UserFormComponent,
     ApplicationInterviewComponent,
     SteamProfileComponent,
+    AgePipe,
   ],
   imports: [
     BrowserModule,

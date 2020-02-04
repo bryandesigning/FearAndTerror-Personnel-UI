@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
             this.router.navigate([ this.returnUrl ]);
           },
           error => {
-            console.log('ERROR: ', error);
             if (error.includes('400')) {
               return this.error = 'Missing required discord role(s)';
             }

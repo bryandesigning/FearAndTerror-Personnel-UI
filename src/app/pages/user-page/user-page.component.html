@@ -102,7 +102,21 @@ vexContainer
         </ng-container>
       </mat-tab>
       <mat-tab label="Staff Notes">
-        <h1>User Notes here</h1>
+        <div class="add-note">
+          <h3>New Staff Note</h3>
+          <mat-form-field>
+            <textarea matInput rows="1" [(ngModel)]="newNote"></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="button" [disabled]="newNote === ''" (click)="addNote()">Add Note</button>
+        </div>
+        <div class="staff-note" *ngIf="notes?.length < 1">
+          No notes available
+        </div>
+        <div class="staff-note" *ngFor="let note of notes">
+          <mat-chip class="action"><a [routerLink]="['/user', note?.posterId ]">{{ note?.posterName }}</a></mat-chip>
+          <mat-chip class="time" [matTooltip]="note?.createdAt | date:'short'" matTooltipPosition="right"> {{ note?.createdAt | timeago }}</mat-chip>
+          {{ note?.contents }}
+        </div>
       </mat-tab>
       <mat-tab label="Applications">
         <div

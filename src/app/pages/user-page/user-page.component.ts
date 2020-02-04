@@ -5,6 +5,7 @@ import { defaultChartOptions } from 'src/@vex/utils/default-chart-options';
 import theme from 'src/@vex/utils/tailwindcss';
 import icGroup from '@iconify/icons-ic/twotone-group';
 import icComment from '@iconify/icons-ic/comment';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'vex-user-page',
@@ -19,6 +20,9 @@ export class UserPageComponent implements OnInit {
   icGroup = icGroup;
   icComment = icComment;
   objectKeys = Object.keys;
+  newNote = '';
+
+  notes: any[];
 
   voiceWeeklyAverage = '00:00:00';
   voicePerDayOptions = defaultChartOptions({
@@ -66,6 +70,7 @@ export class UserPageComponent implements OnInit {
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
+    private toaster: Toaster,
   ) { }
 
   ngOnInit() {
@@ -87,6 +92,7 @@ export class UserPageComponent implements OnInit {
           this.getActivity();
           this.getAverageVoiceTime();
           this.getDailyMessages();
+          this.loadNotes();
         });
 
       this.api.getUserEventLog(this.userId)
@@ -94,6 +100,42 @@ export class UserPageComponent implements OnInit {
           this.userHistory = results;
         });
     });
+  }
+
+  loadNotes() {
+    this.api.getStaffNotes(this.user.userId)
+      .subscribe((results: any) => {
+        this.notes = results;
+      }, err => {
+        console.error(err);
+        this.toaster.open({
+          text: 'Failed to load staff notes',
+          position: 'top-right',
+          type: 'danger',
+          duration: 2500,
+        });
+      });
+  }
+
+  addNote() {
+    this.api.addStaffNote(this.user.userId, this.newNote)
+      .subscribe(res => {
+        this.notes.unshift(res);
+        this.newNote = '';
+        this.toaster.open({
+          text: 'Staff Note Added',
+          position: 'top-right',
+          type: 'success',
+          duration: 2500,
+        });
+      }, err => {
+        this.toaster.open({
+          text: 'Staff Note failed to save',
+          position: 'top-right',
+          type: 'danger',
+          duration: 2500,
+        });
+      });
   }
 
   getActivity() {

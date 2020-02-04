@@ -144,4 +144,12 @@ export class ApiService {
   public getUserEventLog(userId) {
     return this.httpClient.get(`${environment.apiUrl}/v1.0/eventlog/${userId}`);
   }
+
+  public addStaffNote(userId, contents) {
+    return this.httpClient.post(`${environment.apiUrl}/v1.0/notes/${userId}`, { contents });
+  }
+
+  public getStaffNotes(userId) {
+    return this.httpClient.get(`${environment.apiUrl}/v1.0/notes/${userId}`, { params: { orderBy: 'createdAt' }});
+  }
 }
