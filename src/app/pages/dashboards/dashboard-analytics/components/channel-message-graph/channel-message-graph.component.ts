@@ -6,7 +6,7 @@ import icCloudDownload from '@iconify/icons-ic/twotone-cloud-download';
 import faCaretUp from '@iconify/icons-fa-solid/caret-up';
 import faCaretDown from '@iconify/icons-fa-solid/caret-down';
 import theme from 'src/@vex/utils/tailwindcss';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/util/services/api.service';
 import icDelete from '@iconify/icons-ic/twotone-delete';
 
 

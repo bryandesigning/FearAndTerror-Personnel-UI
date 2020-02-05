@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Inject }
 import { Router, ActivatedRoute } from '@angular/router';
 import { fadeInUp400ms } from '../../../../../@vex/animations/fade-in-up.animation';
 import { DOCUMENT } from '@angular/common';
-import { ApiService } from 'src/app/services/api.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ApiService } from 'src/app/util/services/api.service';
+import { AuthenticationService } from 'src/app/util/services/authentication.service';
 import { first } from 'rxjs/operators';
 
 @Component({

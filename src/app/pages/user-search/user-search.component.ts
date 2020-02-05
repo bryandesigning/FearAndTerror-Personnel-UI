@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from 'src/app/services/search.service';
+import { SearchService } from 'src/app/util/services/search.service';
 
 export interface PeriodicElement {
   name: string;

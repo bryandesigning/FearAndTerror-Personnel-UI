@@ -3,7 +3,7 @@ import { PopoverService } from '../popover/popover.service';
 import { ToolbarUserDropdownComponent } from './toolbar-user-dropdown/toolbar-user-dropdown.component';
 import icPerson from '@iconify/icons-ic/twotone-person';
 import theme from '../../utils/tailwindcss';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/util/services/user.service';
 
 @Component({
   selector: 'vex-toolbar-user',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
-import { AuthenticationService, User } from 'src/app/services/authentication.service';
+import { ApiService } from 'src/app/util/services/api.service';
+import { AuthenticationService, User } from 'src/app/util/services/authentication.service';
 
 @Component({
   selector: 'vex-applications',

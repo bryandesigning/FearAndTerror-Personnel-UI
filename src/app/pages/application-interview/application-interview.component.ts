@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User, AuthenticationService } from 'src/app/services/authentication.service';
-import { ApiService } from 'src/app/services/api.service';
+import { User, AuthenticationService } from 'src/app/util/services/authentication.service';
+import { ApiService } from 'src/app/util/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 

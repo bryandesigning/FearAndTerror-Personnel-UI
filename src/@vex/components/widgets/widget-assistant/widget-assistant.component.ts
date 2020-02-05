@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import icCheckCircle from '@iconify/icons-ic/twotone-check-circle';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/util/services/user.service';
 
 @Component({
   selector: 'vex-widget-assistant',

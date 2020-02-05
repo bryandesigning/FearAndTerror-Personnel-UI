@@ -7,7 +7,7 @@ import { LayoutService } from '../../services/layout.service';
 import { ConfigService } from '../../services/config.service';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import { map } from 'rxjs/operators';
-import { SearchService } from 'src/app/services/search.service';
+import { SearchService } from 'src/app/util/services/search.service';
 
 @Component({
   selector: 'vex-sidenav',

@@ -8,7 +8,7 @@ import icvideogame_asset from '@iconify/icons-ic/twotone-videogame-asset';
 import { defaultChartOptions } from '../../../../@vex/utils/default-chart-options';
 import icMoreVert from '@iconify/icons-ic/twotone-more-vert';
 import theme from '../../../../@vex/utils/tailwindcss';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/util/services/api.service';
 
 @Component({
   selector: 'vex-dashboard-analytics',

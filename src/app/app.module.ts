@@ -7,8 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VexModule } from '../@vex/vex.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
-import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
-import { JwtInterceptor } from './interceptors/JwtInterceptor';
 import { UserSearchComponent } from './pages/user-search/user-search.component';
 import { PageLayoutModule } from 'src/@vex/components/page-layout/page-layout.module';
 import { BreadcrumbsModule } from 'src/@vex/components/breadcrumbs/breadcrumbs.module';
@@ -23,7 +21,6 @@ import {
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatAutocomplete,
   MatAutocompleteModule,
 } from '@angular/material';
 import { ContainerModule } from 'src/@vex/directives/container/container.module';
@@ -44,7 +41,9 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { ApplicationInterviewComponent } from './pages/application-interview/application-interview.component';
 import { SteamProfileComponent } from './components/steam-profile/steam-profile.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AgePipe } from './pipes/age.pipe';
+import { JwtInterceptor } from './util/interceptors/JwtInterceptor';
+import { ErrorInterceptor } from './util/interceptors/ErrorInterceptor';
+import { AgePipe } from './util/pipes/age.pipe';
 
 
 @NgModule({
