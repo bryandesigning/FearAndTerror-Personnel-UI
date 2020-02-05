@@ -68,6 +68,15 @@ vexContainer
               </ng-container>
             </ng-container>
             
+            <!-- {{ event | json }} -->
+
+            <ng-container *ngIf="event?.action === 'left-discord'">
+              {{ user?.nickname || user?.username }} left the discord.
+            </ng-container>
+
+            <ng-container *ngIf="event?.action === 'ban-user'">
+              <a [routerLink]="['/user', event?.caller ]">{{ event?.callerName }}</a> banned {{ user?.nickname || user?.username }} for "{{ event?.details?.reason }}".
+            </ng-container>
 
             <ng-container *ngIf="event?.action === 'update-user'">
               <a [routerLink]="['/user', event?.caller ]">{{ event?.callerName }}</a> updated {{ user?.nickname || user?.username }}'s account in PAM.
