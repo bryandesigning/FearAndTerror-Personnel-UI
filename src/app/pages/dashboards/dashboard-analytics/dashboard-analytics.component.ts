@@ -105,7 +105,7 @@ export class DashboardAnalyticsComponent implements OnInit {
     xaxis: {
       type: 'datetime'
     },
-    colors: [ '#f03434', '#22a7f0', '#f7ca18', '#00b16a' ],
+    colors: [ '#f03434', '#22a7f0', '#f7ca18', '#00b16a', '#ffffff' ],
   });
 
   voicePerDay = [];
@@ -126,6 +126,10 @@ export class DashboardAnalyticsComponent implements OnInit {
     {
       name: 'Halo',
       search: 'halo',
+    },
+    {
+      name: 'Post Scriptum',
+      search: 'post',
     },
   ];
 

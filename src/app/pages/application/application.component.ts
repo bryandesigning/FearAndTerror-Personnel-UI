@@ -38,7 +38,7 @@ export class ApplicationComponent implements OnInit {
             this.form = this.fb.group({
               userId: [ this.session.id ],
               username: [ `${this.session.username}#${this.session.discriminator}` ],
-              age: [ null, [ Validators.required, Validators.max(99) ] ],
+              age: [ null, [ Validators.required, Validators.max(99), Validators.min(1) ] ],
               why: [ null, Validators.required ],
               what: [ null, Validators.required ],
               games: [ null, Validators.required ],
